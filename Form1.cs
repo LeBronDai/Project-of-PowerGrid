@@ -8,9 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
-
 using System.Windows.Forms;
-
 using Demo.WindowsForms.CustomMarkers;
 using GMap.NET;
 using GMap.NET.MapProviders;
@@ -20,8 +18,9 @@ using GMap.NET.WindowsForms.ToolTips;
 using System.Reflection;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
-using WindowsFormsApp1.工具类;
 
+using WindowsFormsApp1.工具类;
+//using WindowsFormsApp2;
 using WindowsFormsApp1.数据实体类;
 
 
@@ -29,23 +28,17 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public static string ID;
-        public double[] result=new double[100];
+        #region 全局变量定义
+        private static string ID;//线路编号
+        private double[] result = new double[100];//节点转换结果集
         private GMapOverlay gMapOverlay = new GMapOverlay("markers");//放置markers图层
-        #region 路径加点
+
         private GMapOverlay routes = new GMapOverlay("routes");//放置路径图层
         private List<PointLatLng> RoutePoints = new List<PointLatLng>();//需要绘制的经纬度点集
         private List<Point> Point = new List<Point>();//用户绘制在视窗中的点，是将经纬度转换成GPoint再加上偏移处理后的点
-        private bool HasNewPoint = false;// 是否有新的点加入
         private GMapMarkerRoute Route = null;
         private Point RightBDPoint;
         private Timer blinkTimer = new Timer();
-        private Point BeforeZoomChangeMousePoint = new Point();
-        private PointLatLng NewPointLatLng;//新加入点的经纬度
-        #endregion
-       // public delegate void RouteEnter(GMapRoute item);
-      //  public delegate void RouteEnter(GMapMarkerRoute item);
-        
 
         private GMapMarkerImage currentMarker; //建立GmapMakeImage 对象
         private GMapMarkerRoute currentRoute;  //建立currentRoute对象
@@ -53,17 +46,35 @@ namespace WindowsFormsApp1
         private Boolean addr = false;//控制手动填数还是点dataGridview填数
         private Boolean addover = true;//添加节点可添加
         private 绘制点和线 draw_Line = new 绘制点和线();
-        private List<List<PointLatLng>> pointArray= new List<List<PointLatLng>>();//  动态创建一个二维的列表
+        private List<List<PointLatLng>> pointArray = new List<List<PointLatLng>>();//  动态创建一个二维的列表
         private PointLatLng[][] pointArray1 = new PointLatLng[100][];
-        
-        private int route_max;//路径的最大数目，初始化时使用
 
 
-        private int DragOffsetX = 0, DragOffsetY = 0;
+        private int DragOffsetX = 0, DragOffsetY = 0;//初始化X和Y 坐标
         private bool isLeftButtonDown = false; //鼠标左点积为空
 
+        int k = 0;//绘制线路
+        int m = 0;
 
+        PointLatLng[] a = new PointLatLng[100];//a[i]存放一条线上的坐标信息，用于线路初始化画线
+        PointLatLng[] b = new PointLatLng[100];//b[j]存放每两个节点之间的线，用于线路初始化画线
+        string[] p_name = new string[100];  //
+
+        string[] dengji = new string[] { "220kV", "110kV", "66kV", "35kV", "10kV", "6kV", "380V", "220V" };
+        string[] leixing = new string[] { "ADSS", "OPGW" };
+        int[] zongxin = new int[] { 12, 24, 36, 48 };
+        string g_dengji;//电压等级全局
+        string g_leixing;//光缆类型全局
+        int g_zongxin;//总芯数
+        string[] guzhang_type = new string[] { "断裂", "拉伸", "接头盒进水", "异常", "其他" };
+        string guzhang_date;
+        string guzhang_type1;
        
+        #endregion
+
+        /// <summary>
+        /// 主界面初始化显示
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -88,48 +99,16 @@ namespace WindowsFormsApp1
             this.gMap1.Position = new PointLatLng(40.8456789180537, 111.618702219065); //地图中心位置
             this.gMap1.Show();                                                                         //form.AddLocation("huhehaote");
             #endregion
-            
-            //地图由三层组成。最上层:GMapMarker，中间层:GMapOverlay，最底层:GMapControls　
 
+            #region 初始化时地图上显示的两个点。考虑删除添加节点示例
+        
+            #endregion
 
-            //起点水滴标记
-
-            string s1 = start_lat.Text.Trim();//获取文本输入，出去文本框前后空白
-            string s2 = start_lng.Text.Trim();//获取文本输入，出去文本框前后空白
-            string s3 = end_lat.Text.Trim();//获取文本输入，出去文本框前后空白
-            string s4 = end_lng.Text.Trim();//获取文本输入，出去文本框前后空白
-            Double.TryParse(s1, out result[1]);
-            Double.TryParse(s2, out result[2]);
-            Double.TryParse(s3, out result[3]);
-            Double.TryParse(s4, out result[4]);
-
-            
-
-            PointLatLng start = new PointLatLng(40.8456789180537, 111.618702219065);  //路径起点
-            //PointLatLng start = new PointLatLng(result[1], result[2]);  //路径起点
-            GMapMarker gMapMarker = new GMarkerGoogle(start, GMarkerGoogleType.green);
-            gMapOverlay.Markers.Add(gMapMarker);　　                    //向图层中添加标记 
-            gMap.Overlays.Add(gMapOverlay);　　                         //向控件中添加图层  
-           
-            //终点水滴标记
-            // PointLatLng end = new PointLatLng(result[3], result[4]);   //路径终点
-            PointLatLng end = new PointLatLng(40.8056789180537, 111.708702219065);   //路径终点
-            gMapMarker = new GMarkerGoogle(end, GMarkerGoogleType.blue);
-            gMapOverlay.Markers.Add(gMapMarker);                      //向图层中添加标记  
-
-
-            gMap1.Overlays.Add(gMapOverlay);                          //向控件中添加图层 
-            gMap1.Overlays.Add(routes);
-           
-            this.DrawLineBetweenTwoPoint(start, end);
-            this.DrawrouteBetweenTowPoint(start, end);
-            
-            //鼠标事件-图层事件
-            this.gMap1.MouseClick += new MouseEventHandler(mapControl_MouseClick);
-            this.gMap1.MouseDoubleClick += new MouseEventHandler(mapControl_MouseDoubleClick);
+            #region Gmap1鼠标事件-图层事件
+            //注释掉鼠标点击事件this.gMap1.MouseClick += new MouseEventHandler(mapControl_MouseClick);
             this.gMap1.MouseDown += new MouseEventHandler(mapControl_MouseDown); //鼠标下移
             this.gMap1.MouseUp += new MouseEventHandler(mapControl_MouseUp);
-            this.gMap1.MouseMove += new MouseEventHandler(mapControl_MouseMove);                                                                    //this.gMap.MouseUp += new MouseEventHandler(mapControl_MouseUp);
+          //  this.gMap1.MouseMove += new MouseEventHandler(mapControl_MouseMove);                                                                    //this.gMap.MouseUp += new MouseEventHandler(mapControl_MouseUp);
             this.gMap1.OnMapZoomChanged += new MapZoomChanged(mapControl_OnMapZoomChanged);
 
             //图标事件
@@ -140,39 +119,37 @@ namespace WindowsFormsApp1
                 pointArray1[i] = new PointLatLng[100];//初始化了一个100*100的方阵6-21 14:00
             }
 
-            #region 路径事件---未实现：mapControl_OnRouteEnter没有与委托RouteEnter重载 
-          //  this.gMap.OnRouteEnter += new RouteEnter(mapControl_OnRouteEnter);
-            #endregion
-            void mapControl_MouseClick(object sender, MouseEventArgs e)//鼠标点击
-            {
-                if (e.Button == System.Windows.Forms.MouseButtons.Left) //鼠标右键.
-                {
-                    //gMapOverlay.Markers.Clear();//清理图层
-                    PointLatLng point = gMap1.FromLocalToLatLng(e.X, e.Y);
-                    Bitmap bitmap = Bitmap.FromFile("H:\\研究生学习\\电网项目资源\\图标1集合\\gur-project-13.png") as Bitmap;
-                    //GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.arrow);//系统自带的绿色图标
-                    GMapMarker marker = new GMapMarkerImage(point, bitmap);//自定义图标显示
-                    marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-                    string s = "address:";
-                    marker.ToolTipText = string.Format("{0},{1},{2}", point.Lat, point.Lng,s);//生成坐标
-                    gMapOverlay.Markers.Add(marker);
-                }
-                if (e.Button == System.Windows.Forms.MouseButtons.Right) //鼠标右键.
-                {
-                    contextMenuStrip1.Show(Cursor.Position);
-                }
+            ///<summary>
+           ///鼠标左键地图时，标记所在的点的位置信息,生成小锤头的注释掉了
+           /// </summary>
+            //void mapControl_MouseClick(object sender, MouseEventArgs e)//鼠标点击
+            //{
+            //    if (e.Button == System.Windows.Forms.MouseButtons.Left) //当点击鼠标左键时，标记节点经纬度
+            //    {
+              
+            //        PointLatLng point = gMap1.FromLocalToLatLng(e.X, e.Y);
+            //        Bitmap bitmap = Bitmap.FromFile("H:\\研究生学习\\电网项目资源\\图标1集合\\gur-project-13.png") as Bitmap;
+            //        //GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.arrow);//系统自带的绿色图标
+            //        GMapMarker marker = new GMapMarkerImage(point, bitmap);//自定义图标显示
+            //        marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+            //        string s = "address:";
+            //        marker.ToolTipText = string.Format("{0},{1},{2}", point.Lat, point.Lng, s);//生成坐标
+            //        gMapOverlay.Markers.Add(marker);
+            //    }
+            //    if (e.Button == System.Windows.Forms.MouseButtons.Right) //鼠标右键.
+            //    {
+            //        contextMenuStrip1.Show(Cursor.Position);
+            //    }
 
-            }
-            //未实现出来
-
+            //}
+           
             /// <summary>
             /// 地图拖拽向量
             /// 在进行地图的缩放后需要将该偏移量清零
             /// </summary>
-            
-            void mapControl_MouseUp(object sender, MouseEventArgs e)     //鼠标上移
+            void mapControl_MouseUp(object sender, MouseEventArgs e)     
             {
-               
+
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
 
@@ -187,20 +164,7 @@ namespace WindowsFormsApp1
                     }
                 }
 
-            }
-            void mapControl_MouseMove(object sender, MouseEventArgs e)//鼠标移动，生成对应地坐标
-            {
-                if (e.Button == System.Windows.Forms.MouseButtons.Left && isLeftButtonDown)
-                {
-                    if (currentMarker != null)
-                    {
-                        PointLatLng point = gMap1.FromLocalToLatLng(e.X, e.Y);
-                        currentMarker.Position = point;
-                        currentMarker.ToolTipText = string.Format("{0},{1}", point.Lat, point.Lng);
-                    }
-                }
-            }
-            #region 左键画线需要修改
+            }//鼠标拖拽地图实现上下移动
             void mapControl_MouseDown(object sender, MouseEventArgs e)  //画线
             {
                 if (e.Button == System.Windows.Forms.MouseButtons.Left)
@@ -214,7 +178,7 @@ namespace WindowsFormsApp1
                         Route.OriginOffset.X = DragOffsetX;
                         Route.OriginOffset.Y = DragOffsetY;
                         routes.Markers.Add(Route as GMapMarker);//划线
-                        
+
                         //Route.AddPoint();
                     }
                     Route.AddPoint(point);
@@ -226,15 +190,7 @@ namespace WindowsFormsApp1
                     RightBDPoint.Y = e.Y;
                 }
 
-            }
-            #endregion
-
-            void mapControl_MouseDoubleClick(object sender, MouseEventArgs e)//双击生成圆圈
-            {
-                //var cc = new GMapMarkerCircle(gMap.FromLocalToLatLng(e.X, e.Y));
-                //objects.Markers.Add(cc);
-                //双击打开菜单栏选项
-            }
+            }//鼠标按下左键，进行画线
             void mapControl_OnMarkerEnter(GMapMarker item)//选中边框变红
             {
                 if (item is GMapMarkerImage)//自定义图标变红
@@ -245,17 +201,7 @@ namespace WindowsFormsApp1
 
                 Debug.WriteLine("OnMarkerEnter: " + item.Position);
             }//OnMarkerEnter中设置选中的Marker,同时设置Pen的值,实现高亮
-            void mapControl_OnRouteEnter(GMapMarkerRoute item)
-            {
-                string s = "route information:";
-               
-                item.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-                item.ToolTipText = string.Format("{0}",s);
-                currentRoute = item as GMapMarkerRoute;
-                item.pen = new Pen(Brushes.Yellow, 2); ;
-                Debug.WriteLine("OnRouteEnter: " + item.Position);
-            }
-            void mapControl_OnMarkerLeave(GMapMarker item)//OnMarkerLeave中取消选中的Marker，取消Pen的值，取消高亮
+            void mapControl_OnMarkerLeave(GMapMarker item
             {
                 if (item is GMapMarkerImage)
                 {
@@ -264,7 +210,7 @@ namespace WindowsFormsApp1
                     m.Pen.Color = Color.Blue;
                     Debug.WriteLine("OnMarkerLeave: " + item.Position);
                 }
-            }
+            })//OnMarkerLeave中取消选中的Marker，取消Pen的值，取消高亮      
             void mapControl_OnMapZoomChanged()
             {
                 //在进行地图的缩放后，视图的原点会重新回到MapControl控件的中心点
@@ -276,32 +222,17 @@ namespace WindowsFormsApp1
                     Route.IsZoomChanged = true;
                 }
 
-            }
+            }//地图缩放
 
-
+            #endregion
         }
 
-
-
-
-        private void GMapControl1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void 经度_Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
-        //画出两点之间的线路
-        private void DrawrouteBetweenTowPoint(PointLatLng pointLatLng_S, PointLatLng pointLatLng_E)
+        /// <summary>
+        /// 实现在两点之间画线功能，输入节点的起始和终止坐标
+        /// </summary>
+        /// <param name="pointLatLng_S"> 节点起始坐标</param>
+        /// <param name="pointLatLng_E">节点终止坐标</param>
+        private void DrawrouteBetweenTowPoint(PointLatLng pointLatLng_S, PointLatLng pointLatLng_E)//输入两个坐标在地图上画线
         {
             RoutingProvider rp = gMap1.MapProvider as RoutingProvider;
             if (rp != null)
@@ -313,110 +244,68 @@ namespace WindowsFormsApp1
             {
                 GMapRoute r = new GMapRoute(route.Points, route.Name);
                 gMapOverlay.Routes.Add(r);
-                 gMap1.ZoomAndCenterRoute(r);
+                gMap1.ZoomAndCenterRoute(r);
             }
         }
 
-        private void SplitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        #region 调用子窗体
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            Frm_Child frm = new Frm_Child();//创建子窗体对象
-
-            //frm.TopLevel = false;
-            //frm.TopMost = true;
-            //frm.Dock = DockStyle.Fill;
-            frm.ShowDialog();
-            // frm.MdiParent = this;           //设置子窗体的父窗体为当前窗体
-            //frm.WindowState = FormWindowState.Maximized;
-
-            // frm.ShowDialog();//显示子窗体
-
-        }
-        #endregion
-
-       
-
-        private void SplitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
-
-      
-
-        private void Btn_Add_Click_Click(object sender, EventArgs e)//SQL查询 展示出来
-        {
-            {
-                MySqlConnection myconn = null;
-                MySqlCommand mycom = null;
-                //MySqlDataAdapter myrec = null;
-                myconn = new MySqlConnection("Host =localhost;Database=MapPoint;Username=root;Password=123");//数据库连接
-                myconn.Open();
-                mycom = myconn.CreateCommand();
-                mycom.CommandText = "select * from point,route1 where point.rid=route1.rid";//两个表连接操作
-                MySqlDataAdapter adap = new MySqlDataAdapter(mycom);
-                System.Data.DataSet ds = new System.Data.DataSet();
-                adap.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0].DefaultView;
-                string sql = string.Format("select * from point,route1 where point.rid=route1.rid");
-                mycom.CommandText = sql;//获取或设置要对数据源执行的Transact-SQL语句
-                mycom.CommandType = System.Data.CommandType.Text;//CommandType获取或设置一个值该值只是如何介数CommandText属性
-                MySqlDataReader sdr = mycom.ExecuteReader();
-                int i = 0;
-                while (sdr.Read())
-                {
-                    listView1.Items.Add(sdr[0].ToString());
-                    listView1.Items[i].SubItems.Add(sdr[1].ToString());
-                    i++;
-                }
-                myconn.Close();
-            }
-
-       
-        }
-
+        public Frm_Child_guzhang frm1;
+        public BeiXianShuaiHao frm3;
+        public Analysis_Pre frm;
+        public Frm_Child_kongxin frm2;
+        /// <summary>
+        /// 主界面加载，显示信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             gMap1.Visible = true;
             groupBox1.Visible = true;
-           
-          
-            
             dataGridView1.Visible = false;
             dataGridView2.Visible = false;
-            tabControl1.Visible = false;
-            bindListCiew();
+            TabControl_1.Visible = false;
             show_dataGridView();
-           
+            this.WindowState = FormWindowState.Maximized;
+            frm1 = new Frm_Child_guzhang();
+            frm = new Analysis_Pre();
+            frm2 = new Frm_Child_kongxin();
+
         }
-        //2019年5月28日
-        private void show_dataGridView() //dataGridView 展示
+
+
+        /// <summary>
+        /// 菜单“线路信息”显示
+        /// </summary>
+        private void show_dataGridView() //dataGridView 展示//2019年5月28日---2019年10月28日更改
         {
+            dataGridView1.Rows.Clear();
             DBlink db = new DBlink();
             if (db.DBcon())
             {
-                db.Get_dataGridView1_data("select * from route1");//route表中选择数据
+                db.Get_dataGridView1_data("select rid,rn,rl,voltage_level,cable_type,total_num_optical_cable,left_optical_cable from route1");//route表中选择数据
 
             }
             db.DBclose();
             dataGridView1.Rows.Clear();
-            for (int i = 0; i <route_data.id.Count; i++)    //循环将数据实体类的数据存放到dataGridView中
+            for (int i = 0; i < route_data.rid.Count; i++)    //循环将数据实体类的数据存放到dataGridView中
             {
                 int index = this.dataGridView1.Rows.Add();//索引递加
-                //if (uint_data.tf_audit[i].Equals("未审计"))
-                //{
-                //    this.dataGridView1.Rows[index].DefaultCellStyle.BackColor = Color.Red;
-                //}
-                this.dataGridView1.Rows[index].Cells[0].Value = route_data.id[i];        //id
-                this.dataGridView1.Rows[index].Cells[1].Value = route_data.rid[i];      //rid
-                this.dataGridView1.Rows[index].Cells[2].Value = route_data.rn[i];      //填充路径名称
-                this.dataGridView1.Rows[index].Cells[3].Value = route_data.rl[i];  //填充路径长度
+              
+                this.dataGridView1.Rows[index].Cells[0].Value = route_data.rid[i];        //rid
+                this.dataGridView1.Rows[index].Cells[1].Value = route_data.rn[i];      //填充路径名称
+                this.dataGridView1.Rows[index].Cells[2].Value = route_data.rl[i];  //填充路径长度
+                this.dataGridView1.Rows[index].Cells[3].Value = route_data.volatge_level[i];  //电压等级2
+                this.dataGridView1.Rows[index].Cells[4].Value = route_data.cable_type[i];  //光缆类型
+                this.dataGridView1.Rows[index].Cells[5].Value = route_data.total_num_optical_cable[i];  //光缆总芯数
+                this.dataGridView1.Rows[index].Cells[6].Value = route_data.left_optical_cable[i];  //剩余纤芯数
             }
+            dataGridView1.AllowUserToAddRows = false;
         }
 
+
+        /// <summary>
+        /// “增加节点”选项卡的已有节点显示信息
+        /// </summary>
         private void show_now_pdataGridView1()//展示现有节点6-19-16:25
         {
             DBlink db = new DBlink();
@@ -430,81 +319,88 @@ namespace WindowsFormsApp1
             for (int i = 0; i < point_data.pname.Count; i++)    //循环将数据实体类的数据存放到dataGridView中
             {
                 int index = this.show_now_point_dataGridView.Rows.Add();//索引递加
-                //if (uint_data.tf_audit[i].Equals("未审计"))
-                //{
-                //    this.show_now_point_dataGridView.Rows[index].DefaultCellStyle.BackColor = Color.Red;
-                //}
+               
                 this.show_now_point_dataGridView.Rows[index].Cells[0].Value = point_data.pid[i];        //节点编号
                 this.show_now_point_dataGridView.Rows[index].Cells[1].Value = point_data.lat[i];      //维度
                 this.show_now_point_dataGridView.Rows[index].Cells[2].Value = point_data.lng[i];      //经度
                 this.show_now_point_dataGridView.Rows[index].Cells[3].Value = point_data.pname[i];  //节点名称
                 this.show_now_point_dataGridView.Rows[index].Cells[4].Value = point_data.rid[i];    //线路编号
             }
-
+            show_now_point_dataGridView.AllowUserToAddRows = false;//不显示最后一行留白
         }
 
-        private void show_now_route_dataGridView1()//展示现有节点6-19-17:05 
+
+        /// <summary>
+        /// “增加线路”选项卡已有线路显示信息
+        /// </summary>
+        private void show_now_route_dataGridView1()//展示现有节点 
         {
+           
             DBlink db = new DBlink();
             if (db.DBcon())
             {
-                db.Get_dataGridView3_nowroute_data("select rid,rn,rl from route1");//route表中选择数据
-
+                /* db.Get_dataGridView3_nowroute_data("select rid,rn,rl from route1");*///route表中选择数据
+                //db.Get_dataGridView3_nowroute_data("select rid, rn, rl, voltage_level, cable_type, total_num_optical_cable, left_optical_cable from route1");//route1选择数据
+                
+                db.Get_dataGridView1_data("select rid, rn, rl, voltage_level, cable_type, total_num_optical_cable, left_optical_cable from route1");
             }
             db.DBclose();
-           show_now_route_dataGridView.Rows.Clear();
+            show_now_route_dataGridView.Rows.Clear();
             for (int i = 0; i < route_data.rn.Count; i++)    //循环将数据实体类的数据存放到dataGridView中
             {
                 int index = this.show_now_route_dataGridView.Rows.Add();//索引递加
-                //if (uint_data.tf_audit[i].Equals("未审计"))
-                //{
-                //    this.show_now_route_dataGridView.Rows[index].DefaultCellStyle.BackColor = Color.Red;
-                //}
+                
                 this.show_now_route_dataGridView.Rows[index].Cells[0].Value = route_data.rid[i];        //线路编号
                 this.show_now_route_dataGridView.Rows[index].Cells[1].Value = route_data.rn[i];      //线路名
                 this.show_now_route_dataGridView.Rows[index].Cells[2].Value = route_data.rl[i];      //线路长度
-               
-            }
+                this.show_now_route_dataGridView.Rows[index].Cells[3].Value = route_data.volatge_level[i];        //线路编号
+                this.show_now_route_dataGridView.Rows[index].Cells[4].Value = route_data.cable_type[i];      //线路名
+                this.show_now_route_dataGridView.Rows[index].Cells[5].Value = route_data.total_num_optical_cable[i];      //线路长度
+                this.show_now_route_dataGridView.Rows[index].Cells[6].Value = route_data.left_optical_cable[i];      //线路长度
 
+
+
+            }
+            show_now_route_dataGridView.AllowUserToAddRows = false;//不显示最后一行留白
         }
 
-        //单击dataGridView1表中单击任意一行，显示某路径的节点信息
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)//2019年6月9日22:11修改
+
+       /// <summary>
+       /// 单击已有线路表的某行，显示该条线路上节点基本信息
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)//2019年6月9日22:11修改 单击dataGridView1表中单击任意一行，显示某路径的节点信息
         {
             try
 
-            { 
+            {
                 dataGridView2.Visible = true;
                 ID = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string route_name = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                groupBox1.Text = route_name + "  路径情况";
-
-                //label5.Text = route_name;
-
+                string route_name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                groupBox1.Text = route_name + "  线路节点详情";
                 DBlink db = new DBlink();
-               
-                    string sqlstr = "select route1.id,route1.rid,route1.rn,route1.rl,point.id,point.pid,point.lng,point.lat,point.pname from point,route1 where point.rid=route1.rid and route1.id = " + ID;
-                    //string sqlstr = "select * from point,route1 where point.rid=route1.rid;";
-                    if (db.DBcon())
-                    {
-                        db.Get_dataGridView2_data(sqlstr);
-                    }
-                    db.DBclose();
-               
+                string sqlstr = "select route1.rid,route1.rn,point.pid,point.lng,point.lat,point.pname from point,route1 where point.rid=route1.rid and route1.id = " + ID;
+                if (db.DBcon())
+                {
+                    db.Get_dataGridView2_data(sqlstr);
+                }
+                db.DBclose();
+
                 dataGridView2.Rows.Clear();
-                for (int i = 0; i < point_data.id.Count; i++)    //循环将数据实体类的数据存放到dataGridView中
+                for (int i = 0; i < point_data.pid.Count; i++)    //循环将数据实体类的数据存放到dataGridView中
                 {
                     int index = this.dataGridView2.Rows.Add();
 
-                    this.dataGridView2.Rows[index].Cells[0].Value = route_data.id[i];
-                    this.dataGridView2.Rows[index].Cells[1].Value = route_data.rid[i];
-                    this.dataGridView2.Rows[index].Cells[2].Value = route_data.rn[i];
-                    this.dataGridView2.Rows[index].Cells[3].Value = route_data.rl[i];
-                    this.dataGridView2.Rows[index].Cells[4].Value = point_data.id[i];
-                    this.dataGridView2.Rows[index].Cells[5].Value = point_data.pid[i];
-                    this.dataGridView2.Rows[index].Cells[6].Value = point_data.lng[i];
-                    this.dataGridView2.Rows[index].Cells[7].Value = point_data.lat[i];
-                    this.dataGridView2.Rows[index].Cells[8].Value = point_data.pname[i];
+                    
+                    this.dataGridView2.Rows[index].Cells[0].Value = route_data.rid[i];
+                    this.dataGridView2.Rows[index].Cells[1].Value = route_data.rn[i];
+                    //this.dataGridView2.Rows[index].Cells[2].Value = route_data.rl[i];
+                
+                    this.dataGridView2.Rows[index].Cells[2].Value = point_data.pid[i];
+                    this.dataGridView2.Rows[index].Cells[3].Value = point_data.lng[i];
+                    this.dataGridView2.Rows[index].Cells[4].Value = point_data.lat[i];
+                    this.dataGridView2.Rows[index].Cells[5].Value = point_data.pname[i];
 
                 }
             }
@@ -513,24 +409,21 @@ namespace WindowsFormsApp1
                 MessageBox.Show(ex.Message, "error");
             }
         }
-        //#region 添加数据 2019年5月28日
-        //private void 数据录入ToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
 
 
-        //  //  unit_name.Text = "";
-        //}
-        //#endregion
-
-        //当在dataGridView改变数据时，保存到数据库中2019年6月9日22:20修改
+        /// <summary>
+        /// 实现对选定的线路列表产生的节点信息，进行更新操作，可考虑删除或者保留
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                string rid, urid, rn, rl, pid, puid, pname,lng, lat;
-                
+                string rid, urid, rn, rl, pid, puid, pname, lng, lat;
+
                 DBlink db = new DBlink();
-                Boolean after = true, prior = true;
+             
                 if (dataGridView2.Rows.Count > 0)
                 {
                     rid = dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -544,7 +437,7 @@ namespace WindowsFormsApp1
                     pname = dataGridView2.Rows[e.RowIndex].Cells[8].Value.ToString();
 
                     //string mysqlstr = "update r_p set id= '" + rid + "',rid= '" + urid + "',rn ='" + rn + "',rl ='" + rl + "',ppid ='" + pid + "',pid = '" + puid + "',lng = '" + lng + "',lat = '" + lat + "',pname = '" + pname +"';";
-                    string mysqlstr = "update route1 r,point p set r.rid='" + urid + "',r.rn ='" + rn + "',r.rl ='" + rl + "',p.id ='" + pid + "',p.lng ='" + lng + "',p.lat ='" + lat + "',p.pname ='" + pname + "' where r.id='" + rid + "' and p.id='" + pid+"'";//6.10-16:15-更新
+                    string mysqlstr = "update route1 r,point p set r.rid='" + urid + "',r.rn ='" + rn + "',r.rl ='" + rl + "',p.id ='" + pid + "',p.lng ='" + lng + "',p.lat ='" + lat + "',p.pname ='" + pname + "' where r.id='" + rid + "' and p.id='" + pid + "'";//6.10-16:15-更新
                     if (db.DBcon())
                     {
                         if (!db.UpdataDeletAdd(mysqlstr))//修改当前用户的tag标志
@@ -555,173 +448,20 @@ namespace WindowsFormsApp1
                     db.DBclose();
                 }
 
-                
-                    show_dataGridView();
-                
-                
+
+                show_dataGridView();
+
+
             }
-            
+
             catch  //点到其他的不进行操作
             { }
         }
 
+       
+      
 
-        private void bindListCiew() //添加两列
-        {
-            this.listView1.Columns.Add("编号");
-            this.listView1.Columns.Add("地址");
-            this.listView1.Columns.Add("经度");
-            this.listView1.Columns.Add("纬度");
-            this.listView1.View = System.Windows.Forms.View.Details;
-
-
-        }
-
-        private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-        #region 向数据库中存数据，添加路径
-        private void 添加路径_Click(object sender, EventArgs e)//手动添加路径
-        {
-            try
-            {
-                addr = true;
-                string constr = "Host = localhost; Database = MapPoint; Username = root; Password = 123";
-                //连接数据库
-                MySqlConnection mycon = new MySqlConnection(constr);
-                mycon.Open();//打开数据库
-                string sql = " insert into start_end(s_lat,s_lng,e_lat,e_lng) values('" + start_lat.Text + ',' + start_lng.Text + ',' + end_lat.Text + ',' + start_lng.Text + ")";
-                MySqlDataAdapter mda = new MySqlDataAdapter(sql, mycon);
-                MySqlCommand myCmd = new MySqlCommand(sql, mycon);
-
-
-                myCmd.ExecuteNonQuery();
-                mycon.Close();
-                MessageBox.Show("已存入数据库！");
-            }
-            catch(MySql.Data.MySqlClient.MySqlException)
-            {
-                MessageBox.Show("输入异常请重新输入！");
-               
-                
-            }
-        }
-        #endregion
-        #region 将输入文本转为double类型
-        private void StringToDouble_Click(object sender, EventArgs e)
-        {
-
-            string s = start_lat.Text.Trim();//获取文本输入，出去文本框前后空白
-            double result;
-            if (Double.TryParse(s, out result))
-            {
-                //转换成功，显示结果
-                MessageBox.Show("输出的数为：" + result.ToString());
-            }
-            else
-            {
-                //转换失败，提示错误
-                MessageBox.Show("输出错误", "错误");
-                start_lat.Text = string.Empty;
-            }
-            start_lat.Focus();
-        }
-        #endregion
-        #region 输入坐标划线
-        private void ADDR_Click(object sender, EventArgs e)
-        {
-            if (addr) {
-                string s1 = start_lat.Text.Trim();//获取文本输入，出去文本框前后空白
-                string s2 = start_lng.Text.Trim();//获取文本输入，出去文本框前后空白
-                string s3 = end_lat.Text.Trim();//获取文本输入，出去文本框前后空白
-                string s4 = end_lng.Text.Trim();//获取文本输入，出去文本框前后空白
-                Double.TryParse(s1, out result[1]);
-                Double.TryParse(s2, out result[2]);
-                Double.TryParse(s3, out result[3]);
-                Double.TryParse(s4, out result[4]);
-                PointLatLng start = new PointLatLng(result[1], result[2]);  //路径起点
-                GMapMarker gMapMarker = new GMarkerGoogle(start, GMarkerGoogleType.green);
-                gMapOverlay.Markers.Add(gMapMarker);                      //向图层中添加标记 
-                gMap1.Overlays.Add(gMapOverlay);                           //向控件中添加图层  
-
-                //终点水滴标记
-                PointLatLng end = new PointLatLng(result[3], result[4]);   //路径终点
-                                                                           //PointLatLng end = new PointLatLng(40.8056789180537, 111.708702219065);   //路径终点
-                gMapMarker = new GMarkerGoogle(end, GMarkerGoogleType.blue);
-                gMapOverlay.Markers.Add(gMapMarker);                      //向图层中添加标记  
-                gMap1.Overlays.Add(gMapOverlay);                          //向控件中添加图层 
-                this.DrawLineBetweenTwoPoint(start, end); }
-            #region
-            //else
-            //{
-            //    for (int k = 1; k < 3; k++)
-            //    {
-            //        if (k == 1)
-            //        {
-            //            string s1 = lng.ToString();//获取文本输入，出去文本框前后空白
-            //            string s2 = lat.ToString();//获取文本输入，出去文本框前后空白
-
-
-            //            Double.TryParse(s1, out result[1]);
-            //            Double.TryParse(s2, out result[2]);
-
-            //            PointLatLng start = new PointLatLng(result[1], result[2]);  //路径起点
-            //            GMapMarker gMapMarker = new GMarkerGoogle(start, GMarkerGoogleType.green);
-            //            gMapOverlay.Markers.Add(gMapMarker);                      //向图层中添加标记 
-            //            gMap1.Overlays.Add(gMapOverlay);                           //向控件中添加图层  
-            //        }
-            //        else
-            //        {
-            //            string s3 = lng.ToString();//获取文本输入，出去文本框前后空白
-            //            string s4 = lat.ToString();//获取文本输入，出去文本框前后空白
-            //            Double.TryParse(s3, out result[3]);
-            //            Double.TryParse(s4, out result[4]);
-            //            //终点水滴标记
-            //            PointLatLng end = new PointLatLng(result[3], result[4]);   //路径终点
-            //                                                                       //PointLatLng end = new PointLatLng(40.8056789180537, 111.708702219065);   //路径终点
-            //            GMapMarker gMapMarker = new GMarkerGoogle(end, GMarkerGoogleType.blue);
-            //            gMapOverlay.Markers.Add(gMapMarker);                      //向图层中添加标记  
-            //            gMap1.Overlays.Add(gMapOverlay);                          //向控件中添加图层 
-
-            //        }
-            //        this.DrawLineBetweenTwoPoint(start, end);
-            //    }
-            //}
-            #endregion
-        }
-
-
-        private void 添加线路_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string constr1 = "Host = localhost; Database = MapPoint; Username = root; Password = 123";
-                //连接数据库
-                MySqlConnection mycon1 = new MySqlConnection(constr1);
-                mycon1.Open();//打开数据库
-                string R = R_name.Text;
-                string S = S_name.Text;
-                string E = E_name.Text;
-                string sql = " insert into route(id,routename,s_name,e_name,length,xianxinshu) values(" + RouteId.Text + ',' + R + ',' + S + ',' + E + ',' + length.Text+','+ xianxinshu.Text+")";
-                MySqlDataAdapter mda = new MySqlDataAdapter(sql, mycon1);
-                MySqlCommand myCmd = new MySqlCommand(sql, mycon1);
-
-
-                myCmd.ExecuteNonQuery();
-                mycon1.Close();
-                MessageBox.Show("已存入数据库！");
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                MessageBox.Show("输入异常请重新输入！");
-
-
-            }
-        }
-        #endregion
-
-        #region 画出两点直接的直线
+        #region 初始化地图时显示两个节点的画线调用函数，考虑删除
         private void DrawLineBetweenTwoPoint(PointLatLng pointLatLng_S, PointLatLng pointLatLng_E)
         {
             List<PointLatLng> points = new List<PointLatLng>();
@@ -732,136 +472,7 @@ namespace WindowsFormsApp1
             gMapOverlay.Routes.Add(r);
         }
         #endregion
-       
-
-        private void Delete_route_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        #region 添加路径注释
-        //        private void Button2_Click(object sender, EventArgs e)//增加路径确认
-        //        {
-        //            if (routeinf.Text == "")
-        //                return;
-        //            DBlink db = new DBlink();
-        //            Boolean tag = true;
-        //#region 录入路径信息 可修改5月30日
-        //            string str = "select name from unit_name where name ='" + routeinf.Text + "'";
-
-        //            string id = ID;
-        //            if (db.DBcon())   //连接数据库成功
-        //            {
-        //                if (db.search(str))
-        //                {
-        //                    label2.Text = "该路径已存在";
-        //                    tag = false;
-        //                }
-        //            }
-        //            db.DBclose();//避免多线程操作数据库，影响系统报错，先关闭数据连接
-
-        //            if (tag)
-        //            {
-        //                str = "insert into unit_name(name,TF_audit) values('" + routeinf.Text + "','未审计');";
-        //                if (db.DBcon())   //连接数据库成功
-        //                {
-        //                    if (!db.UpdataDeletAdd(str))
-        //                    {
-        //                        DialogResult dr = MessageBox.Show("路径添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
-        //                    }
-        //                }
-        //                db.DBclose();
-
-
-        //                str = "select ID from unit_name where name ='" + routeinf.Text + "'";
-        //                if (db.DBcon())   //连接数据库成功
-        //                {
-        //                    if (!db.UpdataDeletAdd(str))
-        //                    {
-        //                        id = db.search_id(str);
-        //                    }
-        //                }
-        //                db.DBclose();
-
-        //                for (int i = 0; i < route_data.id.Count; i++)
-        //                {
-        //                    str = "insert into audit_data(ID,time,financial_audit,er_audit,investment_audit,sor_audit,major_audit,audit_investigation) values('" + id + "','" + "year.year_list[i].ToString()" + "','0','0','0','0','0','0');";
-        //                    if (db.DBcon())   //连接数据库成功
-        //                    {
-        //                        if (!db.UpdataDeletAdd(str))
-        //                        {
-        //                            DialogResult dr = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
-        //                        }
-        //                    }
-        //                    db.DBclose();
-        //                }
-        //                routeinf.Text = "";
-        //                show_dataGridView();
-        //            }
-        //        }
-
-        //private void Routeinf_TextChanged(object sender, EventArgs e)
-        //{
-        //    // 修改属性框时发生
-        //    label2.Text = "";
-        //}
-        //private void Button1_Click_1(object sender, EventArgs e)//增加路径取消
-        //{
-        //    routeinf.Text = "";
-        //    dataGridView2.Visible = true;
-        //    Form1_Load(null, null);//重新加载数据
-        //}
-        #endregion
-
-        #region 添加节点信息 可修改5月30日
-        //private void 增加节点ToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-             
-        //    //if (db.DBcon())  //填充id 数组
-        //    //{
-        //    //    //db.Get_id();
-        //    //}
-        //    //db.DBclose();
-
-
-        //    //int i;
-
-        //    //for (i = 0; i < point_data.pid.Count; i++)
-        //    //    已有节点展示.Text += point_data.pid.ToString() + " ";
-
-        //    //label10.Text = "";
-        //    groupBox1.Visible = false;
-        //    add_route.Visible = false;
-        //    delete_route.Visible = false;
-        //    add_p.Visible = true;
-        //    delete_point.Visible = false;
-
-            
-        //}
-
-       
-
-        
-        #endregion
-        private void TextBox1_TextChanged_2(object sender, EventArgs e)
-        {
-
-        }
-
- 
-
-       
-
-        private void GMap1_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-   
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+                
         #region 菜单栏跳转页面
         private void 增加节点ToolStripMenuItem1_Click(object sender, EventArgs e)//TabControl_增加节点
         {
@@ -871,7 +482,7 @@ namespace WindowsFormsApp1
                 db.Get_route();
             }
             db.DBclose();
-            
+
             已有线路显示下拉列表.Items.Clear();//需要修改
             int i;
             for (i = 0; i < route.route_list.Count; i++)
@@ -881,10 +492,10 @@ namespace WindowsFormsApp1
 
             //label10.Text = "";
 
-            tabControl1.Visible = true;
+            TabControl_1.Visible = true;
             dataGridView2.Visible = false;
             groupBox1.Visible = false;
-            tabControl1.SelectTab(增加节点);//跳转到tabControl指定的页面
+            TabControl_1.SelectTab(增加节点);//跳转到tabControl指定的页面
             show_now_pdataGridView1();
         }
         private void 增加线路ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -895,22 +506,32 @@ namespace WindowsFormsApp1
             //    db.Get_route();
             //}
             //db.DBclose();     //避免多线程操作数据库，影响系统报错，先关闭数据连接
-            tabControl1.Visible = true;
+            TabControl_1.Visible = true;
             dataGridView2.Visible = false;
             groupBox1.Visible = false;
-          
-            tabControl1.SelectTab(增加线路);//跳转到tabControl指定的页面
-            show_now_route_dataGridView1();
+
+            TabControl_1.SelectTab(增加线路);//跳转到tabControl指定的页面
+            show_now_route_dataGridView1();//显示线路信息
+            cbo_dengji.Items.Clear();
+            for (int i = 0; i < dengji.Length; i++)
+                cbo_dengji.Items.Add(dengji[i].ToString());
+
+            cbo_leixing.Items.Clear();
+            for (int i = 0; i < leixing.Length; i++)
+                cbo_leixing.Items.Add(leixing[i].ToString());
+            cbo_zongxin.Items.Clear();
+            for (int i = 0; i < zongxin.Length; i++)
+                cbo_zongxin.Items.Add(zongxin[i]);
 
 
         }
 
         private void 删除线路ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            tabControl1.Visible = true;
+            TabControl_1.Visible = true;
             dataGridView2.Visible = false;
             groupBox1.Visible = false;
-           
+
 
             DBlink db = new DBlink();//2019年6月6日22:15
             if (db.DBcon())//填充route_list数组
@@ -922,15 +543,15 @@ namespace WindowsFormsApp1
             delete_r1.Text = "已有线路：";
             for (int i = 0; i < route.route_list.Count; i++)
                 已有线路显示下拉列表2.Items.Add(route.route_list[i].ToString());
-            tabControl1.SelectTab(删除线路);//跳转到tabControl指定的页面
+            TabControl_1.SelectTab(删除线路);//跳转到tabControl指定的页面
         }
 
         private void 删除节点ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             dataGridView2.Visible = false;
             groupBox1.Visible = false;
-            tabControl1.Visible = true;
-            
+            TabControl_1.Visible = true;
+
             DBlink db = new DBlink();
             if (db.DBcon())  //填充Pname 数组
             {
@@ -948,41 +569,46 @@ namespace WindowsFormsApp1
                 #endregion
             }
             db.DBclose();
-            tabControl1.SelectTab(删除节点);//跳转到tabControl指定的页
+            TabControl_1.SelectTab(删除节点);//跳转到tabControl指定的页
 
         }
         private void 路径信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dataGridView1.Visible = true;
             dataGridView2.Visible = false;
-            tabControl1.Visible = false;
+            TabControl_1.Visible = false;
         }
         private void 节点信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dataGridView1.Visible = true;
             dataGridView2.Visible = true;
             groupBox1.Visible = true;
-            tabControl1.Visible = false;
+            TabControl_1.Visible = false;
         }
 
         #endregion
         #region TabControl增删路径节点6-16---6-18
+       
+
+        /// <summary>
+        /// “增加线路”选项卡，向route1库中增加线路信息,确认与取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void 增加线路确认_Click(object sender, EventArgs e)//TabControl1 
         {
+           
             if (rn1.Text == "")
                 return;
-            DBlink db = new DBlink();
+            DBlink db = new DBlink();//建立新的数据连接
             Boolean tag = true;
-            #region 录入路径信息 可修改5月30日
-            string str = "select rn from route1 where rn ='" + rn1.Text + "'";
-            #endregion
-
+            string str = "select rn from route1 where rn ='" + rn1.Text + "'";//sql查询语句
             string id = ID;
             if (db.DBcon())   //连接数据库成功
             {
                 if (db.search(str))
                 {
-                    label135.Text = "该路径已存在";
+                    tishi.Text = "该路径已存在";
                     tag = false;
                 }
             }
@@ -994,22 +620,17 @@ namespace WindowsFormsApp1
             }
             db.DBclose();
 
-
             if (db.DBcon())  //填充id 数组
             {
                 db.Get_Id();
             }
             db.DBclose();
-
-
-           
-
             if (tag)
             {
-                str = "insert into route1(rid,rn,rl) values('" + rid1.Text + "','" + rn1.Text + "','" + rl1.Text + "');";
+                str = "insert into route1(rid,rn,rl,voltage_level,cable_type,total_num_optical_cable,left_optical_cable) values ('" + rid1.Text + "','" + rn1.Text + "','" + rl1.Text + "','" + g_dengji + "','" +g_leixing + "','" +g_zongxin + "','" + txt_left_optical_cable.Text + "');";
                 if (db.DBcon())   //连接数据库成功
                 {
-                    if (!db.UpdataDeletAdd(str))
+                    if (!db.UpdataDeletAdd(str))//检查能否添加数据
                     {
                         DialogResult dr = MessageBox.Show("线路添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     }
@@ -1021,7 +642,7 @@ namespace WindowsFormsApp1
                 db.DBclose();
 
 
-                str = "select id from route1 where rn ='" + rid1.Text + "'";
+                str = "select id from route1 where rn ='" + rn1.Text + "'";
                 if (db.DBcon())   //连接数据库成功
                 {
                     if (!db.UpdataDeletAdd(str))
@@ -1030,17 +651,21 @@ namespace WindowsFormsApp1
                     }
                 }
                 db.DBclose();
-
-               
-
                 rid1.Text = ""; //输入复位
                 rn1.Text = "";
                 rl1.Text = "";
+                //txt_voltage_level.Text = "";
+                //txt_cable_type.Text = "";
+                //txt_total_num_optical_cable.Text="";
+                txt_left_optical_cable.Text="";
+                cbo_dengji.Text = "";
+                cbo_leixing.Text = "";
+                cbo_zongxin.Text = "";
+
                 show_dataGridView();
                 show_now_route_dataGridView1();
             }
         }
-
         private void 增加线路取消_Click(object sender, EventArgs e)
         {
             rid1.Text = "";
@@ -1048,6 +673,205 @@ namespace WindowsFormsApp1
             Form1_Load(null, null);//重新加载数据
         }
 
+
+        /// <summary>
+        /// “添加节点”选项卡信息，“添加”，“添加完成”，“继续添加”，“绘制”，“取消”功能
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 节点添加确定_Click(object sender, EventArgs e)//"添加"，添加一个节点的基本信息
+        {
+            try
+            {
+                DBlink db = new DBlink();
+                string str = null;
+
+                if (addover)
+                {
+                    if (point_data.pname.Contains(add_pname1.Text))
+                    {
+                        增加节点提示信息2.Text = "该节点已存在";
+
+                    }
+                    else
+                    {
+
+                        #region 向数据库添加点
+
+                        str = "insert into point(pid,lat,lng,pname,rid) values('" + add_pid1.Text + "','" + add_lat1维度.Text + "','" + add_lng1经度.Text + "','" + add_pname1.Text + "','" + add_rid1.Text + "');";
+
+
+
+                        if (db.DBcon())   //连接数据库成功
+                        {
+                            if (!db.UpdataDeletAdd(str))
+                            {
+                                DialogResult dr = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                                return;
+                            }
+                            else
+                            {
+                                DialogResult dr2 = MessageBox.Show("数据添加成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            }
+                        }
+                        db.DBclose();
+
+
+                        if (db.DBcon())  //填充Pname 数组后显示
+                        {
+                            db.Get_point();
+                        }
+                        db.DBclose();
+
+                        已有线路显示下拉列表.Items.Clear();//需要修改
+                        int i;
+                        for (i = 0; i < route.route_list.Count; i++)
+                            已有线路显示下拉列表.Items.Add(route.route_list[i].ToString());
+                        //for (i = 0; i < route.id.Count; i++)
+                        //      已有线路显示下拉列表.Items.Add(route.id.ToString());
+                        #endregion
+
+
+                        string lng1 = add_lat1维度.Text.ToString();//6-17-22:04  添加节点//起点经度
+                        string lat1 = add_lng1经度.Text.ToString();//起点维度
+                                                                 //string lng2 = add_lng2经度.Text.ToString();//
+                                                                 //string lng2 = add_lat2维度.Text.ToString();  已删除
+                                                                 //string lat2 = add_lng2经度.Text.ToString();
+
+                        string sname = add_pname1.Text.ToString();//6-18-22:13得到起点的名称
+                                                                  //string ename = add_pname2.Text.ToString();   已删除
+
+                        //string lat2 = add_lat2维度.Text.ToString();
+                        //string lng2 = end_lng.Text.ToString();//终点经度
+                        //string lat2 = end_lat.Text.ToString();//终点维度
+                        #region 三个点划线 6-17 16:18---22:00修改成功   6-19-22:22分先注释掉，要恢复
+                        //for (int j = 0; j < 3; j++)// 先存到
+                        //{
+                        //    PointLatLng[] a = new PointLatLng[10];
+                        //    //PointLatLng[] b = new PointLatLng[10];
+                        //    a[j] = drawLine.S_Turn_P(lng1, lat1);
+                        //    //b[j] = drawLine.E_Turn_P(lng2, lat2);
+
+                        //    //drawLine.DrawLine(a, b, gMapOverlay, gMap1);
+                        //   // drawLine.DrawLine(a,b,sname,ename, gMapOverlay, gMap1);
+                        //}
+                        #endregion
+
+                        a[k] = draw_Line.S_Turn_P(lng1, lat1);//将输入的节点放入a[k]中
+                        string str1 = null;
+
+                        str1 = "insert into route_point1(rid,lat,lng,pname) values('" + add_rid1.Text + "','" + add_lat1维度.Text + "','" + add_lng1经度.Text + "','" + add_pname1.Text + "');";
+                        if (db.DBcon())   //连接数据库成功
+                        {
+                            if (!db.UpdataDeletAdd(str1))
+                            {
+                                DialogResult dr1 = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                                return;
+                            }
+                            else
+                            {
+                                DialogResult dr3 = MessageBox.Show("数据添加成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            }
+                        }
+                        db.DBclose();
+
+                        p_name[k] = add_pname1.Text;
+                        k++;
+
+                        //6-17-17:30
+                        //drawLine.DrawLine(lng1, lat1, lng2, lat2, gMapOverlay, gMap1);
+
+                        add_pid1.Text = "";
+                        add_lat1维度.Text = "";
+                        add_lng1经度.Text = "";
+                        add_pname1.Text = "";
+                        add_rid1.Text = "";
+
+                        show_now_pdataGridView1();
+
+                    }
+                }
+                else { MessageBox.Show("本次添加完成！"); }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "error");
+            }
+            //向地图图画点连线
+
+
+        }
+
+        private void Button27_Click(object sender, EventArgs e)//继续添加，添加完一条线路上节点信息
+        {
+            addover = true;
+        }
+
+        private void Add_over_Click(object sender, EventArgs e)////增加节点“添加完成”功能
+        {
+
+            addover = false;
+            add_pid1.Text = "";
+            add_lat1维度.Text = "";
+            add_lng1经度.Text = "";
+            add_pname1.Text = "";
+            add_rid1.Text = "";
+            DBlink db = new DBlink();
+            try
+            {
+                for (int i = 0; i < k; i++)//6-20日22:00添加用于页面初始化
+                {
+
+                    pointArray1[m][i] = a[i];// 将a[i]中的坐标存入poinyArray[0][j]中//21 -11:00 
+                                             //string str = "insert into values pointArray[m][i]";
+                                             //if (db.DBcon())   //连接数据库成功
+                                             //{
+                                             //    if (!db.UpdataDeletAdd(str))
+                                             //    {
+                                             //        DialogResult dr = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                                             //        return;
+                                             //    }
+                                             //    else
+                                             //    {
+                                             //        DialogResult dr2 = MessageBox.Show("数据添加成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                                             //    }
+                                             //}
+                                             //db.DBclose();
+
+                }
+                m++;
+                Array.Clear(a, 0, a.Length);
+               // k = 0; //添加完成后将计数重置为零,此时k=0;就没法画线了
+            }//
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+        bool drawLined = false;
+        private void DrawLine_Click(object sender, EventArgs e)//添加完一个线路节点添加节点“绘制”功能
+        {
+
+            //drawLine.DrawLine(a, k, gMapOverlay, gMap1);
+            draw_Line.DrawLine(a, k, p_name, gMapOverlay, gMap1);
+            drawLined = true;
+            k = 0;
+        }
+
+        private void 增加节点取消1_Click(object sender, EventArgs e)
+        {
+            Form1_Load(null, null);     //重新加载数据
+            dataGridView2.Visible = true;
+
+        }
+
+
+        /// <summary>
+        /// “删除线路”选项卡，向route1库中删除线路信息,确认与取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void 删除线路确认_Click_1(object sender, EventArgs e)//TabControl1 6.16-10:48
         {
             if (待删除线路.Text == "路径名")
@@ -1065,8 +889,6 @@ namespace WindowsFormsApp1
 
             string str = "delete from route1 where rn='" + 待删除线路.Text + "'";//从数据库中删除节点的名称
 
-
-
             if (db.DBcon())//连接数据库成功
             {
                 if (!db.UpdataDeletAdd(str))
@@ -1080,7 +902,7 @@ namespace WindowsFormsApp1
             }
             db.DBclose();//避免多线程操作数据库，影响系统报错，先关闭数据库连接
             待删除线路.Text = "";
-            
+
         }
 
         private void 删除线路取消_Click_1(object sender, EventArgs e)
@@ -1101,281 +923,13 @@ namespace WindowsFormsApp1
                 MessageBox.Show(ex.ToString());
             }
         }
-
         
-        private void Button27_Click(object sender, EventArgs e)
-        {
-            addover = true;
-        }
-        int k = 0;
-        int m = 0;
-        PointLatLng[] a = new PointLatLng[100];//22:24  6-19
-        PointLatLng[] b = new PointLatLng[100];//6月29日
-        string[] p_name = new string[100];
-        private void 节点添加确定_Click(object sender, EventArgs e)//TabControl1 6-16-11;25
-        {
-            try
-            {
-                DBlink db = new DBlink();
-                string str = null;
-
-                if (addover)
-                {
-                    if (point_data.pname.Contains(add_pname1.Text))
-                    {
-                        增加节点提示信息2.Text = "该节点已存在";
-
-                    }
-                    else
-                    {
-
-                        #region 向数据库添加点
-                     
-                            str = "insert into point(pid,lat,lng,pname,rid) values('" + add_pid1.Text + "','" + add_lat1维度.Text + "','" + add_lng1经度.Text + "','" + add_pname1.Text + "','" + add_rid1.Text + "');";
-
-
-                           
-                            if (db.DBcon())   //连接数据库成功
-                            {
-                                if (!db.UpdataDeletAdd(str))
-                                {
-                                    DialogResult dr = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                                    return;
-                                }
-                                else
-                                {
-                                    DialogResult dr2 = MessageBox.Show("数据添加成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                                }
-                            }
-                            db.DBclose();
-                       
-                       
-                        if (db.DBcon())  //填充Pname 数组后显示
-                        {
-                            db.Get_point();
-                        }
-                        db.DBclose();
-
-                        已有线路显示下拉列表.Items.Clear();//需要修改
-                        int i;
-                        for (i = 0; i < route.route_list.Count; i++)
-                            已有线路显示下拉列表.Items.Add(route.route_list[i].ToString());
-                        //for (i = 0; i < route.id.Count; i++)
-                        //      已有线路显示下拉列表.Items.Add(route.id.ToString());
-                        #endregion
-
-                       
-                        string lng1 = add_lat1维度.Text.ToString();//6-17-22:04  添加节点//起点经度
-                        string lat1 = add_lng1经度.Text.ToString();//起点维度
-                                                                 //string lng2 = add_lng2经度.Text.ToString();//
-                        //string lng2 = add_lat2维度.Text.ToString();  已删除
-                        //string lat2 = add_lng2经度.Text.ToString();
-
-                        string sname = add_pname1.Text.ToString();//6-18-22:13得到起点的名称
-                        //string ename = add_pname2.Text.ToString();   已删除
-
-                        //string lat2 = add_lat2维度.Text.ToString();
-                        //string lng2 = end_lng.Text.ToString();//终点经度
-                        //string lat2 = end_lat.Text.ToString();//终点维度
-                        #region 三个点划线 6-17 16:18---22:00修改成功   6-19-22:22分先注释掉，要恢复
-                        //for (int j = 0; j < 3; j++)// 先存到
-                        //{
-                        //    PointLatLng[] a = new PointLatLng[10];
-                        //    //PointLatLng[] b = new PointLatLng[10];
-                        //    a[j] = drawLine.S_Turn_P(lng1, lat1);
-                        //    //b[j] = drawLine.E_Turn_P(lng2, lat2);
-
-                        //    //drawLine.DrawLine(a, b, gMapOverlay, gMap1);
-                        //   // drawLine.DrawLine(a,b,sname,ename, gMapOverlay, gMap1);
-                        //}
-                        #endregion
-                       
-                        a[k]= draw_Line.S_Turn_P(lng1, lat1);//将输入的节点放入a[k]中
-                        string str1=null;
-
-                        str1= "insert into route_point1(线路编号,节点维度,节点经度,节点名称) values('" + add_rid1.Text + "','" + add_lat1维度.Text + "','" + add_lng1经度.Text + "','" + add_pname1.Text +"');";
-                        if (db.DBcon())   //连接数据库成功
-                        {
-                            if (!db.UpdataDeletAdd(str1))
-                            {
-                                DialogResult dr1 = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                                return;
-                            }
-                            else
-                            {
-                                DialogResult dr3 = MessageBox.Show("数据添加成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                            }
-                        }
-                        db.DBclose();
-
-                        p_name[k] = add_pname1.Text;
-                        k++;
-                       
-                        //6-17-17:30
-                        //drawLine.DrawLine(lng1, lat1, lng2, lat2, gMapOverlay, gMap1);
-
-                        add_pid1.Text = "";
-                        add_lat1维度.Text = "";
-                        add_lng1经度.Text = "";
-                        add_pname1.Text = "";
-                        add_rid1.Text = "";
-                        
-                        show_now_pdataGridView1();
-
-                    }
-                }
-                else { MessageBox.Show("本次添加完成！"); }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "error");
-            }
-            //向地图图画点连线
-       
-
-        }
         
-        private void Add_over_Click(object sender, EventArgs e)//每次添加完一个线路上数据点击一次并将a[i]记录到
-        {
-            
-            addover = false;
-            add_pid1.Text = "";
-            add_lat1维度.Text = "";
-            add_lng1经度.Text = "";
-            add_pname1.Text = "";
-            add_rid1.Text = "";
-            DBlink db = new DBlink();
-            try
-            {
-                for (int i = 0; i < k; i++)//6-20日22:00添加用于页面初始化
-                {
-
-                    pointArray1[m][i] = a[i];// 将a[i]中的坐标存入poinyArray[0][j]中//21 -11:00 
-                    //string str = "insert into values pointArray[m][i]";
-                    //if (db.DBcon())   //连接数据库成功
-                    //{
-                    //    if (!db.UpdataDeletAdd(str))
-                    //    {
-                    //        DialogResult dr = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                    //        return;
-                    //    }
-                    //    else
-                    //    {
-                    //        DialogResult dr2 = MessageBox.Show("数据添加成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                    //    }
-                    //}
-                    //db.DBclose();
-                    
-                }
-                m++;
-                Array.Clear(a, 0, a.Length);
-                k = 0; //添加完成后将计数重置为零,此时k=0;就没法画线了
-            }//
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-        }
-        private void DrawLine_Click(object sender, EventArgs e)
-        {
-            //drawLine.DrawLine(a, k, gMapOverlay, gMap1);
-            draw_Line.DrawLine(a, k, p_name,gMapOverlay, gMap1);
-        }
-        private void Route_init_Click(object sender, EventArgs e)//6月20日22:09
-        {
-            //6-28 15 20-修改
-            int[] rid = new int[20];//定义一个整型数组存线路编号
-            string[] pname = new string[20];//定义字符型的存名字 
-            int j;
-            int n;
-            int temp=0;
-            int count=0;
-            int[] count1 = new int[20]; 
-            DBlink db = new DBlink();
-            string lng1, lat1;
-            if (db.DBcon())  //得到id序列
-            {
-                db.Get_rid();
-            }
-            db.DBclose();
-            for (int i = 0; i < r_p.rid.Count; i++)//遍历画线
-            {   try
-                {
-                    rid[i] = Convert.ToInt32(r_p.rid[i]);
-                    if (db.DBcon())  //填充id 数组
-                    {
-                        db.Get_lng_lat_pname(rid[i]);//得到经度维度，节点名称
-                    }
-                    db.DBclose();
-                  
-                     for (  j = temp, n=0; j < r_p.pname.Count && rid[i] == Convert.ToInt32(r_p.rid[i]); j++,n++)
-                         {
-                            lng1 = Convert.ToString(r_p.lng[j]);
-                            lat1 = Convert.ToString(r_p.lat[j]);
-                        //for（k = 0; k <3;k++ ）{
-                        //    a[k] = draw_Line.S_Turn_P(lng1, lat1);
-                        //}
-                            b[j] = draw_Line.S_Turn_P(lng1, lat1);//a[j]存放某一条线路上坐标
-                            a[n] = b[j];
-                            pname[n] = Convert.ToString(r_p.pname[j]);
-                            
-                        }
-                  
-                        temp = j;//2019年6月28日20:53
-                        count1[i] = r_p.pname.Count;//取中间值
-                    if (i > 0) { count = count1[i] -count1[i - 1]; }//6.29--17:05 修改，使count值为该行的数
-                    else if (i == 0) { count = count1[0]; }
-                        draw_Line.DrawLine(a, count, pname, gMapOverlay, gMap1);//画a[j]中的坐标
-                        Array.Clear(a, 0, a.Length);//把a清空，等待画另一条线
-                    
-                    
-                    // r_p.pname.Count = 0;
-                }
-                catch
-                {
-
-                }
-             }
-            //route_max = m;//将添加线路最大赋给route_max
-            //draw_Line.route_init(4, a, pointArray1, route_max, gMapOverlay ,gMap1);//4为节点上、
-        }
-
-         
-        private void 增加节点取消1_Click(object sender, EventArgs e)
-        {
-            Form1_Load(null, null);     //重新加载数据
-            dataGridView2.Visible = true;
-
-        }
-
-        private void 已有线路显示下拉列表_SelectedIndexChanged(object sender, EventArgs e)//6-19-15:55. 
-        {
-           
-            try
-            {
-                string id;
-                DBlink db = new DBlink();
-                string str = "select id from route1 where rn ='" + 已有线路显示下拉列表.Text + "'";
-                if (db.DBcon())   //连接数据库成功
-                {
-                    if (!db.UpdataDeletAdd(str))
-                    {
-                        id = db.search_id(str);
-                        add_rid1.Text = id;
-                        //add_rid2.Text = id;
-                    }
-                }
-                db.DBclose();
-               
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-           
-
-        }
+        /// <summary>
+        /// “删除节点”选项卡，“确定”删除和“取消”删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void 删除节点确定_Click_1(object sender, EventArgs e)//TabControl1 6.16-11:20
         {
             try
@@ -1384,10 +938,22 @@ namespace WindowsFormsApp1
                 string str = null;
                 string str1 = null;
                 str = "delete from point where pname ='" + 输入待删除节点.Text + "'";
-                str1 = "delete from route_point1 where 节点名称 ='" + 输入待删除节点.Text + "'";
+                str1 = "delete from route_point1 where pname ='" + 输入待删除节点.Text + "'";
                 if (db.DBcon())   //连接数据库成功
                 {
-                    if (db.UpdataDeletAdd(str)&& db.UpdataDeletAdd(str1))
+                    if (db.UpdataDeletAdd(str))
+                    {
+                        DialogResult dr = MessageBox.Show("数据删除成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    }
+                    else
+                    {
+                        DialogResult dr = MessageBox.Show("数据删除失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    }
+                }
+                db.DBclose();
+                if (db.DBcon())   //连接数据库成功
+                {
+                    if (db.UpdataDeletAdd(str1))
                     {
                         DialogResult dr = MessageBox.Show("数据删除成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     }
@@ -1410,7 +976,7 @@ namespace WindowsFormsApp1
                     已有节点显示下拉列表3.Items.Add(point_data.pname[i].ToString());
 
 
-      
+
             }
             catch (Exception ex)
             {
@@ -1418,7 +984,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void 已有节点显示下拉列表3_SelectedIndexChanged(object sender, EventArgs e)
+        private void 已有节点显示下拉列表3_SelectedIndexChanged(object sender, EventArgs e)//待删除已有节点显示
         {
             try
             {
@@ -1435,8 +1001,117 @@ namespace WindowsFormsApp1
             输入待删除节点.Text = "";
             Form1_Load(null, null);     //重新加载数据
         }
+        bool chushi = false;
+        /// <summary>
+        /// 实现“线路初始化”，把数据库中的线路绘制出来
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Route_init_Click(object sender, EventArgs e)//线路初始化
+        {
+            if(!gMapOverlay.IsVisibile)
+            {
+                gMapOverlay.IsVisibile = true;
+            }
 
-        #region 键盘操作
+            if (!chushi|| drawLined)
+            {
+                //6-28 15 20-修改
+                int[] rid = new int[50];//定义一个整型数组存线路编号
+                string[] pname = new string[50];//定义字符型的存名字 
+
+                int j;
+                int n;
+                int temp = 0;
+                int count = 0;
+                int[] count1 = new int[20];
+                DBlink db = new DBlink();
+                string lng1, lat1;
+                if (db.DBcon())  //得到id序列
+                {
+                    db.Get_rid();
+                }
+                db.DBclose();
+                for (int i = 0; i < r_p.rid.Count; i++)//遍历画线
+                {
+                    try
+                    {
+                        rid[i] = Convert.ToInt32(r_p.rid[i]);
+                        if (db.DBcon())  //填充id 数组
+                        {
+                            db.Get_lng_lat_pname(rid[i]);//得到经度维度，节点名称
+                        }
+                        db.DBclose();
+
+                        for (j = temp, n = 0; j < r_p.pname.Count && rid[i] == Convert.ToInt32(r_p.rid[i]); j++, n++)
+                        {
+                            lng1 = Convert.ToString(r_p.lng[j]);
+                            lat1 = Convert.ToString(r_p.lat[j]);
+                            b[j] = draw_Line.S_Turn_P(lng1, lat1);//a[j]存放某一条线路上坐标
+                            a[n] = b[j];
+                            pname[n] = Convert.ToString(r_p.pname[j]);
+
+                        }
+
+                        temp = j;//2019年6月28日20:53
+                        count1[i] = r_p.pname.Count;//取中间值
+                        if (i > 0) { count = count1[i] - count1[i - 1]; }//6.29--17:05 修改，使count值为该行的数
+                        else if (i == 0) { count = count1[0]; }
+                        draw_Line.DrawLine(a, count, pname, gMapOverlay, gMap1);//画a[j]中的坐标
+                        Array.Clear(a, 0, a.Length);//把a清空，等待画另一条线
+                    }
+
+                    catch
+                    {
+
+                    }
+                }
+
+                Array.Clear(a, 0, a.Length);
+                Array.Clear(count1, 0, count1.Length);
+                Array.Clear(b, 0, b.Length);
+                Array.Clear(pname, 0, pname.Length);
+                Array.Clear(rid, 0, rid.Length);
+                chushi = true;
+            }
+
+        }
+
+
+
+        /// <summary>
+        /// 已有线路显示下拉列表，选项，未找到，建议删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 已有线路显示下拉列表_SelectedIndexChanged(object sender, EventArgs e)//6-19-15:55. 
+        {
+
+            try
+            {
+                string id;
+                DBlink db = new DBlink();
+                string str = "select id from route1 where rn ='" + 已有线路显示下拉列表.Text + "'";
+                if (db.DBcon())   //连接数据库成功
+                {
+                    if (!db.UpdataDeletAdd(str))
+                    {
+                        id = db.search_id(str);
+                        add_rid1.Text = id;
+                        //add_rid2.Text = id;
+                    }
+                }
+                db.DBclose();
+
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        
+        
+        #region 键盘操作地图，放大缩小功能+ -
         private void ButtonZoomUp_Click_Click(object sender, EventArgs e)
         {
             gMap1.Zoom = ((int)gMap1.Zoom) + 1;
@@ -1445,7 +1120,7 @@ namespace WindowsFormsApp1
         {
             gMap1.Zoom = ((int)(gMap1.Zoom + 0.99)) - 1;
         }
-        
+
         // key-press events
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1469,6 +1144,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             int offset = -22;
@@ -1491,32 +1167,10 @@ namespace WindowsFormsApp1
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                //if (currentPolygon != null)
-                //{
-                //    polygons.Polygons.Remove(currentPolygon);
-                //    currentPolygon = null;
-                //}
-
-                //if (currentRoute != null)
-                //{
-                //    routes.Routes.Remove(currentRoute);
-                //    currentRoute = null;
-                //}
-
-                //if (CurentRectMarker != null)
-                //{
-                //    objects.Markers.Remove(CurentRectMarker);
-
-                //    if (CurentRectMarker.InnerMarker != null)
-                //    {
-                //        objects.Markers.Remove(CurentRectMarker.InnerMarker);
-                //    }
-                //    CurentRectMarker = null;
-
-                //    RegeneratePolygon();
-                }
+                
             }
-        #endregion
+        }
+        
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (gMap1.Focused)
@@ -1539,46 +1193,63 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
-        private void Delete_Route_Click(object sender, EventArgs e)
-        {
-            routes.Routes.Clear();
-        }
-
+        #endregion
+        #region 关闭TabControl1选项卡
         private void Quit_Tabcontrol_Click(object sender, EventArgs e)
         {
-            tabControl1.Visible = false;
+            TabControl_1.Visible = false;
         }
 
         private void Button1_Click_1(object sender, EventArgs e)
         {
-            tabControl1.Visible = false;
+            TabControl_1.Visible = false;
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            tabControl1.Visible = false;
+            TabControl_1.Visible = false;
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            tabControl1.Visible = false;
+            TabControl_1.Visible = false;
+        }
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            TabControl_1.Visible = false;
+        }
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            TabControl_1.Visible = false;
         }
 
+        #endregion
+        # region 选项卡选择功能
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
             if (e.TabPage == 增加线路)
             {
-                tabControl1.Visible = true;
+                TabControl_1.Visible = true;
                 dataGridView2.Visible = false;
                 groupBox1.Visible = false;
 
                 //tabControl1.SelectTab(增加线路);//跳转到tabControl指定的页面
                 show_now_route_dataGridView1();
+                cbo_dengji.Items.Clear();
+                for (int i = 0; i < dengji.Length; i++)
+                    cbo_dengji.Items.Add(dengji[i].ToString());
+
+                cbo_leixing.Items.Clear();
+                for (int i = 0; i < leixing.Length; i++)
+                    cbo_leixing.Items.Add(leixing[i].ToString());
+                cbo_zongxin.Items.Clear();
+                for (int i = 0; i < zongxin.Length; i++)
+                    cbo_zongxin.Items.Add(zongxin[i]);
+
             }
             if (e.TabPage == 删除线路)
             {
-                tabControl1.Visible = true;
+                TabControl_1.Visible = true;
                 dataGridView2.Visible = false;
                 groupBox1.Visible = false;
 
@@ -1609,7 +1280,7 @@ namespace WindowsFormsApp1
                 for (i = 0; i < route.route_list.Count; i++)
                     已有线路显示下拉列表.Items.Add(route.route_list[i].ToString());
 
-                tabControl1.Visible = true;
+                TabControl_1.Visible = true;
                 dataGridView2.Visible = false;
                 groupBox1.Visible = false;
                 //tabControl1.SelectTab(增加节点);//跳转到tabControl指定的页面
@@ -1619,7 +1290,7 @@ namespace WindowsFormsApp1
             {
                 dataGridView2.Visible = false;
                 groupBox1.Visible = false;
-                tabControl1.Visible = true;
+                TabControl_1.Visible = true;
 
                 DBlink db = new DBlink();
                 if (db.DBcon())  //填充Pname 数组
@@ -1640,19 +1311,541 @@ namespace WindowsFormsApp1
                 db.DBclose();
                 //tabControl1.SelectTab(删除节点);//跳转到tabControl指定的页
             }
-        }
+            if (e.TabPage == 录入光功率)
+            {
+                dataGridView1.Visible = false;
+                dataGridView2.Visible = false;
+                groupBox1.Visible = false;
+                TabControl_1.Visible = true;
 
-        private void Show_now_route_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+                DBlink db = new DBlink();
+                if (db.DBcon())  //填充Pname 数组
+                {
+                    db.Get_route();
+                }
+                db.DBclose();
+
+                已有光功率线路下拉列表.Items.Clear();//需要修改
+                int i;
+                for (i = 0; i < route.route_list.Count; i++)
+                    已有光功率线路下拉列表.Items.Add(route.route_list[i].ToString());
+                //tabControl1.SelectTab(删除节点);//跳转到tabControl指定的页
+            }
+
+            if (e.TabPage == 查看线路和节点)
+            {
+                dataGridView1.Visible = true;
+                dataGridView2.Visible = true;
+                TabControl_1.Visible = true;
+                
+                groupBox1.Visible = true;
+            }
+            if (e.TabPage == 录入故障信息)
+            {
+                TabControl_1.Visible = true;
+                DBlink db = new DBlink();
+                if (db.DBcon())  //填充Pname 数组
+                {
+                    db.Get_route();
+                }
+                db.DBclose();
+
+                cbo_guzhangroute.Items.Clear();
+                
+                for (int i = 0; i < route.route_list.Count; i++)
+                    cbo_guzhangroute.Items.Add(route.route_list[i].ToString());
+
+                cbo_guzhangleixing.Items.Clear();
+                for (int i = 0; i < guzhang_type.Length; i++)
+                    cbo_guzhangleixing.Items.Add(guzhang_type[i].ToString());
+
+
+                TabControl_1.Visible = true;
+                dataGridView2.Visible = false;
+                groupBox1.Visible = false;
+                TabControl_1.SelectTab(录入故障信息);//跳转到tabControl指定的页面
+
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 清理图层
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Delete_Marker_Click(object sender, EventArgs e)//清理图标
         {
 
+            //gMap1.Overlays.Add(gMapOverlay);
+
+            //gMap1.Overlays.Clear();
+
+            gMapOverlay.IsVisibile = false;
+
+            //gMapOverlay.Routes.Clear();//清理路径
+            // routes.Routes.Clear();
+
         }
 
-        private void Delete_Marker_Click(object sender, EventArgs e)
+        private void Delete_Route_Click(object sender, EventArgs e)//清理线路
         {
-            gMapOverlay.Markers.Clear();//清理图层
-            gMapOverlay.Routes.Clear();//清理路径
+            gMapOverlay.IsVisibile = false;
+            //foreach (var c in CountryStatus)
+            //    if (tcpRoutes.TryGetValue(tcp.Key, out route))
+            //{
+            //    routes.Routes.Remove(route);
+            //}
+            //gMapOverlay.Routes.Remove();
+            //sessions.Clear();
+            //sessions = null;
+            //gMap1.Overlays.Add(gMapOverlay);
+            //gMap1.Overlays.Clear();
+        }
+
+
+        #region 添加光功率2019年10月24日
+        private void 光功率录入确认_Click(object sender, EventArgs e)
+        {
+            try{
+                DBlink db = new DBlink();
+                string str = null;
+                str = "insert into optical_power values('" + add_rid2.Text + "','" + add_rn2.Text + "','" + add_dB.Text + "','" + add_day.Text + "');";//向光功率表中插入数据
+               
+                if (db.DBcon())   //连接数据库成功
+                {
+                    if (!db.UpdataDeletAdd(str))
+                    {
+                        DialogResult dr = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        return;
+                    }
+                    else
+                    {
+                        DialogResult dr2 = MessageBox.Show("数据添加成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    }
+                }
+                db.DBclose();
+
+                if (db.DBcon())//填充route_list数组
+                {
+                    db.Get_route();
+                }
+                db.DBclose();
+                已有光功率线路下拉列表.Items.Clear();//清空
+                int j;
+                for (j = 0;j< route.route_list.Count;j++)
+                    已有光功率线路下拉列表.Items.Add(route.route_list[j].ToString());
+                
+                add_rid2.Text = "";//输入复位
+                add_rn2.Text = "";
+                add_dB.Text = "";
+                add_day.Text = "";
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "error");
+            }
+        }
+        private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            add_day.Text = dateTimePicker1.Value.Year.ToString() + dateTimePicker1.Value.Month.ToString() + dateTimePicker1.Value.Day.ToString();
+        }
+        private void 已有光功率线路下拉列表_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            add_rn2.Text=已有光功率线路下拉列表.Text;
+            string id;
+            DBlink db=new DBlink();
+            string str = "select id from route1 where rn ='" + 已有光功率线路下拉列表.Text + "'";
+            if (db.DBcon())   //连接数据库成功
+            {
+                if (!db.UpdataDeletAdd(str))
+                {
+                    id = db.search_id(str);
+                    //add_rid1.Text = id;
+                    add_rid2.Text = id;
+                }
+            }
+            db.DBclose();
+        }
+        private void 光功率录入ToolStripMenuItem_Click(object sender, EventArgs e)//2019年10月24日
+        {
+            DBlink db = new DBlink();
+            if (db.DBcon())  //填充Pname 数组
+            {
+                db.Get_route();
+            }
+            db.DBclose();
+
+            已有光功率线路下拉列表.Items.Clear();//需要修改
+            int i;
+            for (i = 0; i < route.route_list.Count; i++)
+                已有光功率线路下拉列表.Items.Add(route.route_list[i].ToString());
+            //for (i = 0; i < route.id.Count; i++)
+            //    已有线路显示下拉列表.Items.Add(route.id.ToString());
+
+            //label10.Text = "";
+
+            TabControl_1.Visible = true;
+            dataGridView2.Visible = false;
+            dataGridView1.Visible = false;
+            groupBox1.Visible = false;
+            TabControl_1.SelectTab(录入光功率);//跳转到tabControl指定的页面
+        }
+        #endregion
+
+
+        private void 查看线路ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Visible = true;
+            dataGridView2.Visible = false;
+            TabControl_1.Visible = true;
+            TabControl_1.SelectTab(查看线路和节点);//跳转到tabControl指定的页面
+        }
+
+        private void 查看节点ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Visible = true;
+            dataGridView2.Visible = true;
+            TabControl_1.Visible = true;
+            TabControl_1.SelectTab(查看线路和节点);
+        }
+
+        private void 统计分析ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             
         }
+
+        private void GMap1_Load(object sender, EventArgs e)
+        {
+            //gMapOverlay.Markers.Clear();//清除标记
+            //gMapOverlay.Routes.Clear();//清除线路
+            ////6-28 15 20-修改
+            //int[] rid = new int[20];//定义一个整型数组存线路编号
+            //string[] pname = new string[20];//定义字符型的存名字 
+            //int j;
+            //int n;
+            //int temp = 0;
+            //int count = 0;
+            //int[] count1 = new int[20];
+            //DBlink db = new DBlink();
+            //string lng1, lat1;
+            //if (db.DBcon())  //得到id序列
+            //{
+            //    db.Get_rid();
+            //}
+            //db.DBclose();
+            //for (int i = 0; i < r_p.rid.Count; i++)//遍历画线
+            //{
+            //    try
+            //    {
+            //        rid[i] = Convert.ToInt32(r_p.rid[i]);
+            //        if (db.DBcon())  //填充id 数组
+            //        {
+            //            db.Get_lng_lat_pname(rid[i]);//得到经度维度，节点名称
+            //        }
+            //        db.DBclose();
+
+            //        for (j = temp, n = 0; j < r_p.pname.Count && rid[i] == Convert.ToInt32(r_p.rid[i]); j++, n++)
+            //        {
+            //            lng1 = Convert.ToString(r_p.lng[j]);
+            //            lat1 = Convert.ToString(r_p.lat[j]);
+            //            b[j] = draw_Line.S_Turn_P(lng1, lat1);//a[j]存放某一条线路上坐标
+            //            a[n] = b[j];
+            //            pname[n] = Convert.ToString(r_p.pname[j]);
+
+            //        }
+
+            //        temp = j;//2019年6月28日20:53
+            //        count1[i] = r_p.pname.Count;//取中间值
+            //        if (i > 0) { count = count1[i] - count1[i - 1]; }//6.29--17:05 修改，使count值为该行的数
+            //        else if (i == 0) { count = count1[0]; }
+            //        draw_Line.DrawLine(a, count, pname, gMapOverlay, gMap1);//画a[j]中的坐标
+            //        Array.Clear(a, 0, a.Length);//把a清空，等待画另一条线
+            //    }
+            //    catch
+            //    {
+
+            //    }
+            //}
+            
+        }
+
+        private void SplitContainer1_Panel2_SizeChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 查看线路和节点_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void DataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void 空芯率统计分析ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (frm1 != null)
+            {
+                if (frm1.IsDisposed)
+                    frm1 = new Frm_Child_guzhang();//如果已经销毁，则重新创建子窗口对象
+                frm1.Show();
+                
+            }
+            else
+            {
+                frm1 = new Frm_Child_guzhang();
+                frm1.Show();
+                
+            }
+         //   frm1.Show();
+           
+        }
+
+        private void 故障统计分析ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frm1 != null)
+            {
+                if (frm1.IsDisposed)
+                    frm1 = new Frm_Child_guzhang();//如果已经销毁，则重新创建子窗口对象
+                frm1.Show();
+
+            }
+            else
+            {
+                frm1 = new Frm_Child_guzhang();
+                frm1.Show();
+
+            }
+            //frm1.Show();
+
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm1.Close();
+            frm.Close();
+        }
+
+        private void Cbo_dengji_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+               g_dengji = cbo_dengji.Text;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void Cbo_leixing_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                g_leixing = cbo_leixing.Text;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void Cbo_zongxin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                g_zongxin = Convert.ToInt32(cbo_zongxin.Text);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void 录入故障_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DBlink db = new DBlink();
+                string str ;
+                try
+                {
+                    str = "insert into guzhang values('" + txt_addrid.Text + "','" + txt_addrn.Text + "','" + txt_addday.Text + "','" + guzhang_type1 + "')";//向故障表添加数据
+
+                    if (db.DBcon())   //连接数据库成功
+                    {
+                        if (!db.UpdataDeletAdd(str))
+                        {
+                            DialogResult dr = MessageBox.Show("数据添加失败！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            return;
+                        }
+                        else
+                        {
+                            DialogResult dr2 = MessageBox.Show("数据添加成功！", "标题", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        }
+                    }
+                    db.DBclose();
+                }
+                catch (System.Exception ex) {
+                    MessageBox.Show("录入信息有误请检查输入","错误提示！");
+                }
+
+                if (db.DBcon())//填充route_list数组
+                {
+                    db.Get_route();
+                }
+                db.DBclose();
+                cbo_guzhangroute.Items.Clear();//清空
+                int j;
+                for (j = 0; j < route.route_list.Count; j++)
+                    cbo_guzhangroute.Items.Add(route.route_list[j].ToString());
+
+                txt_addrid.Text = "";//输入复位
+                txt_addrn.Text = "";
+                txt_addday.Text = "";
+              
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "error");
+            }
+        }
+
+        private void Cbo_guzhangleixing_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            guzhang_type1 = cbo_guzhangleixing.Text;
+
+        }
+
+        private void 故障信息录入ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+          
+            DBlink db = new DBlink();
+            if (db.DBcon())  //填充Pname 数组
+            {
+                db.Get_route();
+            }
+            db.DBclose();
+
+            cbo_guzhangroute.Items.Clear();
+            for (int i = 0; i < route.route_list.Count; i++)
+                cbo_guzhangroute.Items.Add(route.route_list[i].ToString());
+
+            cbo_guzhangleixing.Items.Clear();
+            for (int i = 0; i < guzhang_type.Length; i++)
+                cbo_guzhangleixing.Items.Add(guzhang_type[i].ToString());
+
+
+            TabControl_1.Visible = true;
+            dataGridView2.Visible = false;
+            groupBox1.Visible = false;
+            TabControl_1.SelectTab(录入故障信息);//跳转到tabControl指定的页面
+
+
+        }
+
+        
+
+        private void 光功率录入取消_Click(object sender, EventArgs e)
+        {
+            Form1_Load(null, null);
+        }
+
+        private void 录入故障取消_Click(object sender, EventArgs e)
+        {
+            Form1_Load(null, null);
+        }
+
+        private void Cbo_guzhangroute_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txt_addrn.Text = cbo_guzhangroute.Text;
+            string id;
+            DBlink db = new DBlink();
+            string str = "select id from route1 where rn ='" + cbo_guzhangroute.Text + "'";
+            if (db.DBcon())   //连接数据库成功
+            {
+                if (!db.UpdataDeletAdd(str))
+                {
+                    id = db.search_id(str);
+                    //add_rid1.Text = id;
+                    txt_addrid.Text = id;
+                }
+            }
+            db.DBclose();
+        }
+      
+        private void DateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            //txt_addday.Text = dateTimePicker2.Value.Year.ToString() + dateTimePicker2.Value.Month.ToString() + dateTimePicker2.Value.Day.ToString();
+       
+            txt_addday.Text =dateTimePicker2.Value.Date.ToString();
+
+        }
+
+        private void GroupBox7_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 备纤衰耗分析ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frm3 != null)
+            {
+                if (frm3.IsDisposed)
+                    frm3 = new BeiXianShuaiHao();//如果已经销毁，则重新创建子窗口对象
+                frm3.Show();
+
+            }
+            else
+            {
+                frm3 = new BeiXianShuaiHao();
+                frm3.Show();
+
+            }
+        }
+
+        private void 光功率预测toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            if (frm != null)
+            {
+                if (frm.IsDisposed)
+                    frm = new Analysis_Pre();//如果已经销毁，则重新创建子窗口对象
+                frm.Show();
+
+            }
+            else
+            {
+                frm = new Analysis_Pre();
+                frm.Show();
+
+            }
+            //frm.Show();
+
+        }
+
+        
+
+       
+
         #endregion
 
 

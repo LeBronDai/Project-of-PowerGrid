@@ -141,7 +141,7 @@ namespace WindowsFormsApp1.工具类
             {
                 GMapMarker gMapMarker = new GMarkerGoogle(a[i], GMarkerGoogleType.green);//起点
 
-                gMapMarker.ToolTipText = "Start:" + p_name[i];   //标记设置6-18-22:00
+                gMapMarker.ToolTipText = "Start:" + p_name[i]+a[i];   //标记设置6-18-22:00
                 gMapMarker.ToolTipMode = MarkerTooltipMode.OnMouseOver; //标记模式鼠标放上面显示
 
                 gMapOverlay.Markers.Add(gMapMarker);
@@ -149,7 +149,7 @@ namespace WindowsFormsApp1.工具类
                 if (i + 1 < k)
                 {
                     GMapMarker gMapMarker1 = new GMarkerGoogle(a[i + 1], GMarkerGoogleType.blue);//；终点类型为蓝色
-                    gMapMarker1.ToolTipText = "End:" + p_name[i + 1];   //标记设置
+                    gMapMarker1.ToolTipText = "End:" + p_name[i+1]+a[i+1];   //标记设置
                     gMapMarker1.ToolTipMode = MarkerTooltipMode.OnMouseOver; //标记模式
 
                     gMapOverlay.Markers.Add(gMapMarker1);
@@ -164,8 +164,8 @@ namespace WindowsFormsApp1.工具类
         {
             for (int i = 0; i < k - 1; i++)                      //输入k次值，从k 次值中取出前后a[i],a[i+1]连线
             {
-                GMapMarker gMapMarker = new GMarkerGoogle(a[i], GMarkerGoogleType.green);//起点
-
+                GMapMarker gMapMarker = new GMarkerGoogle(a[i], GMarkerGoogleType.green_big_go);//起点
+            
                 gMapMarker.ToolTipText = "Start:" + p_name;   //标记设置6-18-22:00
                 gMapMarker.ToolTipMode = MarkerTooltipMode.OnMouseOver; //标记模式鼠标放上面显示
 
@@ -173,9 +173,10 @@ namespace WindowsFormsApp1.工具类
                 gMap1.Overlays.Add(gMapOverlay);
                 if (i + 1 < k)
                 {
-                    GMapMarker gMapMarker1 = new GMarkerGoogle(a[i + 1], GMarkerGoogleType.blue);//；终点类型为蓝色
+                    GMapMarker gMapMarker1 = new GMarkerGoogle(a[i + 1], GMarkerGoogleType.red_big_stop);//；终点类型为蓝色
                     gMapMarker1.ToolTipText = "End:" + p_name;   //标记设置
                     gMapMarker1.ToolTipMode = MarkerTooltipMode.OnMouseOver; //标记模式
+                    
 
                     gMapOverlay.Markers.Add(gMapMarker1);
 
@@ -190,10 +191,11 @@ namespace WindowsFormsApp1.工具类
             List<PointLatLng> points = new List<PointLatLng>();
             points.Add(pointLatLng_S);
             points.Add(pointLatLng_E);
-            GMapRoute r = new GMapRoute(points, "");
+            GMapRoute r = new GMapRoute(points, "rn");
+
+           
+            r.Stroke = new Pen(Color.Green, 2);
             
-            
-            r.Stroke = new Pen(Color.Green, 1);
             
             gMapOverlay.Routes.Add(r);
         }

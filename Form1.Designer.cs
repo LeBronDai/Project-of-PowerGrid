@@ -32,19 +32,32 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.buttonZoomDown = new System.Windows.Forms.Button();
             this.buttonZoomUp_Click = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TabControl_1 = new System.Windows.Forms.TabControl();
             this.增加线路 = new System.Windows.Forms.TabPage();
             this.Show_now_route = new System.Windows.Forms.GroupBox();
             this.show_now_route_dataGridView = new System.Windows.Forms.DataGridView();
             this.线路编号1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.线路名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.线路长度 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.电压等级 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.光缆类型 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.光缆总芯数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.剩余纤芯数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quit_Tabcontrol = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbo_leixing = new System.Windows.Forms.ComboBox();
+            this.cbo_dengji = new System.Windows.Forms.ComboBox();
+            this.cbo_zongxin = new System.Windows.Forms.ComboBox();
+            this.tishi = new System.Windows.Forms.Label();
             this.label135 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
+            this.txt_left_optical_cable = new System.Windows.Forms.TextBox();
             this.rl1 = new System.Windows.Forms.TextBox();
             this.rn1 = new System.Windows.Forms.TextBox();
             this.label66 = new System.Windows.Forms.Label();
@@ -193,78 +206,131 @@
             this.删除节点确定 = new System.Windows.Forms.Button();
             this.已有节点 = new System.Windows.Forms.Label();
             this.label134 = new System.Windows.Forms.Label();
+            this.录入光功率 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.date_tishi = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.光功率提示信息 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.已有光功率线路下拉列表 = new System.Windows.Forms.ComboBox();
+            this.add_day = new System.Windows.Forms.TextBox();
+            this.add_dB = new System.Windows.Forms.TextBox();
+            this.add_rn2 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.add_rid2 = new System.Windows.Forms.TextBox();
+            this.光功率录入取消 = new System.Windows.Forms.Button();
+            this.光功率录入确认 = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.查看线路和节点 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.urId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.路径名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.用户节点Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lng = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.rID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.urId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.路径名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.路径长度 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.用户节点Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lng = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.add_point = new System.Windows.Forms.GroupBox();
-            this.节点提示 = new System.Windows.Forms.Label();
-            this.addp = new System.Windows.Forms.TextBox();
-            this.添加节点取消 = new System.Windows.Forms.Button();
-            this.添加节点确定 = new System.Windows.Forms.Button();
-            this.已有节点展示 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.录入故障信息 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.cbo_guzhangleixing = new System.Windows.Forms.ComboBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.cbo_guzhangroute = new System.Windows.Forms.ComboBox();
+            this.txt_addday = new System.Windows.Forms.TextBox();
+            this.txt_addrn = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.txt_addrid = new System.Windows.Forms.TextBox();
+            this.录入故障取消 = new System.Windows.Forms.Button();
+            this.录入故障 = new System.Windows.Forms.Button();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
             this.gMap1 = new GMap.NET.WindowsForms.GMapControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.线路管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.增加线路ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除线路ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.更改线路ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.查询线路ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查看线路ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.节点管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.增加节点ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除节点ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.更改节点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.查询节点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.路径信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.节点信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查看节点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.统计分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.空芯率统计分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.故障统计分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.故障信息录入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.备纤衰耗分析ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.光功率录入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.光功率预测toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gMap = new GMap.NET.WindowsForms.GMapControl();
+            this.ditucaozuo = new System.Windows.Forms.Label();
             this.route_init = new System.Windows.Forms.Button();
             this.Delete_Route = new System.Windows.Forms.Button();
             this.delete_Marker = new System.Windows.Forms.Button();
-            this.E_name = new System.Windows.Forms.TextBox();
-            this.S_name = new System.Windows.Forms.TextBox();
-            this.xianxin = new System.Windows.Forms.Label();
-            this.Ename = new System.Windows.Forms.Label();
-            this.Sname = new System.Windows.Forms.Label();
-            this.R_name = new System.Windows.Forms.TextBox();
-            this.Routename = new System.Windows.Forms.Label();
-            this.xianxinshu = new System.Windows.Forms.TextBox();
-            this.length = new System.Windows.Forms.TextBox();
-            this.RouteId = new System.Windows.Forms.TextBox();
-            this.R_length = new System.Windows.Forms.Label();
-            this.Id = new System.Windows.Forms.Label();
-            this.添加线路 = new System.Windows.Forms.Button();
-            this.ADDR = new System.Windows.Forms.Button();
-            this.stringToDouble = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.btn_Add_Click = new System.Windows.Forms.Button();
-            this.AddSQL = new System.Windows.Forms.ListBox();
-            this.openchild = new System.Windows.Forms.Button();
-            this.end = new System.Windows.Forms.Label();
-            this.start = new System.Windows.Forms.Label();
-            this.添加路径 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.经度 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.纬度 = new System.Windows.Forms.Label();
-            this.end_lng = new System.Windows.Forms.TextBox();
-            this.start_lng = new System.Windows.Forms.TextBox();
-            this.end_lat = new System.Windows.Forms.TextBox();
-            this.start_lat = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.添加节点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加边ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -275,7 +341,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.TabControl_1.SuspendLayout();
             this.增加线路.SuspendLayout();
             this.Show_now_route.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.show_now_route_dataGridView)).BeginInit();
@@ -299,10 +365,19 @@
             this.groupBox24.SuspendLayout();
             this.groupBox25.SuspendLayout();
             this.groupBox26.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.录入光功率.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.查看线路和节点.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.add_point.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.录入故障信息.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -318,58 +393,25 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.buttonZoomDown);
             this.splitContainer1.Panel1.Controls.Add(this.buttonZoomUp_Click);
-            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView2);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.TabControl_1);
             this.splitContainer1.Panel1.Controls.Add(this.gMap1);
             this.splitContainer1.Panel1.Controls.Add(this.menuStrip1);
             this.splitContainer1.Panel1.Controls.Add(this.gMap);
-            this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.SplitContainer1_Panel1_Paint);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.ditucaozuo);
             this.splitContainer1.Panel2.Controls.Add(this.route_init);
             this.splitContainer1.Panel2.Controls.Add(this.Delete_Route);
             this.splitContainer1.Panel2.Controls.Add(this.delete_Marker);
-            this.splitContainer1.Panel2.Controls.Add(this.E_name);
-            this.splitContainer1.Panel2.Controls.Add(this.S_name);
-            this.splitContainer1.Panel2.Controls.Add(this.xianxin);
-            this.splitContainer1.Panel2.Controls.Add(this.Ename);
-            this.splitContainer1.Panel2.Controls.Add(this.Sname);
-            this.splitContainer1.Panel2.Controls.Add(this.R_name);
-            this.splitContainer1.Panel2.Controls.Add(this.Routename);
-            this.splitContainer1.Panel2.Controls.Add(this.xianxinshu);
-            this.splitContainer1.Panel2.Controls.Add(this.length);
-            this.splitContainer1.Panel2.Controls.Add(this.RouteId);
-            this.splitContainer1.Panel2.Controls.Add(this.R_length);
-            this.splitContainer1.Panel2.Controls.Add(this.Id);
-            this.splitContainer1.Panel2.Controls.Add(this.添加线路);
-            this.splitContainer1.Panel2.Controls.Add(this.ADDR);
-            this.splitContainer1.Panel2.Controls.Add(this.stringToDouble);
-            this.splitContainer1.Panel2.Controls.Add(this.listView1);
-            this.splitContainer1.Panel2.Controls.Add(this.btn_Add_Click);
-            this.splitContainer1.Panel2.Controls.Add(this.AddSQL);
-            this.splitContainer1.Panel2.Controls.Add(this.openchild);
-            this.splitContainer1.Panel2.Controls.Add(this.end);
-            this.splitContainer1.Panel2.Controls.Add(this.start);
-            this.splitContainer1.Panel2.Controls.Add(this.添加路径);
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.经度);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Panel2.Controls.Add(this.纬度);
-            this.splitContainer1.Panel2.Controls.Add(this.end_lng);
-            this.splitContainer1.Panel2.Controls.Add(this.start_lng);
-            this.splitContainer1.Panel2.Controls.Add(this.end_lat);
-            this.splitContainer1.Panel2.Controls.Add(this.start_lat);
-            this.splitContainer1.Size = new System.Drawing.Size(1117, 537);
-            this.splitContainer1.SplitterDistance = 829;
+            this.splitContainer1.Panel2.SizeChanged += new System.EventHandler(this.SplitContainer1_Panel2_SizeChanged);
+            this.splitContainer1.Size = new System.Drawing.Size(1256, 617);
+            this.splitContainer1.SplitterDistance = 930;
             this.splitContainer1.TabIndex = 0;
-            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainer1_SplitterMoved);
             // 
             // buttonZoomDown
             // 
-            this.buttonZoomDown.Location = new System.Drawing.Point(741, 86);
+            this.buttonZoomDown.Location = new System.Drawing.Point(872, 109);
             this.buttonZoomDown.Name = "buttonZoomDown";
             this.buttonZoomDown.Size = new System.Drawing.Size(29, 23);
             this.buttonZoomDown.TabIndex = 17;
@@ -379,7 +421,7 @@
             // 
             // buttonZoomUp_Click
             // 
-            this.buttonZoomUp_Click.Location = new System.Drawing.Point(741, 51);
+            this.buttonZoomUp_Click.Location = new System.Drawing.Point(872, 59);
             this.buttonZoomUp_Click.Name = "buttonZoomUp_Click";
             this.buttonZoomUp_Click.Size = new System.Drawing.Size(29, 23);
             this.buttonZoomUp_Click.TabIndex = 17;
@@ -387,18 +429,22 @@
             this.buttonZoomUp_Click.UseVisualStyleBackColor = true;
             this.buttonZoomUp_Click.Click += new System.EventHandler(this.ButtonZoomUp_Click_Click);
             // 
-            // tabControl1
+            // TabControl_1
             // 
-            this.tabControl1.Controls.Add(this.增加线路);
-            this.tabControl1.Controls.Add(this.删除线路);
-            this.tabControl1.Controls.Add(this.增加节点);
-            this.tabControl1.Controls.Add(this.删除节点);
-            this.tabControl1.Location = new System.Drawing.Point(38, 28);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(642, 475);
-            this.tabControl1.TabIndex = 3;
-            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
+            this.TabControl_1.Controls.Add(this.增加线路);
+            this.TabControl_1.Controls.Add(this.删除线路);
+            this.TabControl_1.Controls.Add(this.增加节点);
+            this.TabControl_1.Controls.Add(this.删除节点);
+            this.TabControl_1.Controls.Add(this.录入光功率);
+            this.TabControl_1.Controls.Add(this.查看线路和节点);
+            this.TabControl_1.Controls.Add(this.录入故障信息);
+            this.TabControl_1.Location = new System.Drawing.Point(3, 28);
+            this.TabControl_1.Name = "TabControl_1";
+            this.TabControl_1.SelectedIndex = 0;
+            this.TabControl_1.Size = new System.Drawing.Size(848, 565);
+            this.TabControl_1.TabIndex = 3;
+            this.TabControl_1.SelectedIndexChanged += new System.EventHandler(this.已有线路显示下拉列表_SelectedIndexChanged);
+            this.TabControl_1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
             // 增加线路
             // 
@@ -408,7 +454,7 @@
             this.增加线路.Location = new System.Drawing.Point(4, 22);
             this.增加线路.Name = "增加线路";
             this.增加线路.Padding = new System.Windows.Forms.Padding(3);
-            this.增加线路.Size = new System.Drawing.Size(634, 449);
+            this.增加线路.Size = new System.Drawing.Size(840, 539);
             this.增加线路.TabIndex = 0;
             this.增加线路.Text = "增加线路";
             this.增加线路.UseVisualStyleBackColor = true;
@@ -416,26 +462,33 @@
             // Show_now_route
             // 
             this.Show_now_route.Controls.Add(this.show_now_route_dataGridView);
-            this.Show_now_route.Location = new System.Drawing.Point(21, 21);
+            this.Show_now_route.Location = new System.Drawing.Point(11, 36);
             this.Show_now_route.Name = "Show_now_route";
-            this.Show_now_route.Size = new System.Drawing.Size(552, 184);
+            this.Show_now_route.Size = new System.Drawing.Size(717, 259);
             this.Show_now_route.TabIndex = 19;
             this.Show_now_route.TabStop = false;
             this.Show_now_route.Text = "已有线路展示";
             // 
             // show_now_route_dataGridView
             // 
+            this.show_now_route_dataGridView.AllowUserToAddRows = false;
+            this.show_now_route_dataGridView.AllowUserToDeleteRows = false;
+            this.show_now_route_dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.show_now_route_dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.show_now_route_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.show_now_route_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.线路编号1,
             this.线路名称,
-            this.线路长度});
-            this.show_now_route_dataGridView.Location = new System.Drawing.Point(63, 21);
+            this.线路长度,
+            this.电压等级,
+            this.光缆类型,
+            this.光缆总芯数,
+            this.剩余纤芯数});
+            this.show_now_route_dataGridView.Location = new System.Drawing.Point(20, 43);
             this.show_now_route_dataGridView.Name = "show_now_route_dataGridView";
             this.show_now_route_dataGridView.RowTemplate.Height = 23;
-            this.show_now_route_dataGridView.Size = new System.Drawing.Size(344, 122);
+            this.show_now_route_dataGridView.Size = new System.Drawing.Size(676, 201);
             this.show_now_route_dataGridView.TabIndex = 20;
-            this.show_now_route_dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Show_now_route_dataGridView_CellContentClick);
             // 
             // 线路编号1
             // 
@@ -452,23 +505,52 @@
             this.线路长度.HeaderText = "线路长度";
             this.线路长度.Name = "线路长度";
             // 
+            // 电压等级
+            // 
+            this.电压等级.HeaderText = "电压等级";
+            this.电压等级.Name = "电压等级";
+            // 
+            // 光缆类型
+            // 
+            this.光缆类型.HeaderText = "光缆类型";
+            this.光缆类型.Name = "光缆类型";
+            // 
+            // 光缆总芯数
+            // 
+            this.光缆总芯数.HeaderText = "光缆总芯数";
+            this.光缆总芯数.Name = "光缆总芯数";
+            // 
+            // 剩余纤芯数
+            // 
+            this.剩余纤芯数.HeaderText = "剩余纤芯数";
+            this.剩余纤芯数.Name = "剩余纤芯数";
+            // 
             // quit_Tabcontrol
             // 
             this.quit_Tabcontrol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.quit_Tabcontrol.Location = new System.Drawing.Point(609, 1);
+            this.quit_Tabcontrol.Location = new System.Drawing.Point(795, 6);
             this.quit_Tabcontrol.Name = "quit_Tabcontrol";
-            this.quit_Tabcontrol.Size = new System.Drawing.Size(25, 23);
+            this.quit_Tabcontrol.Size = new System.Drawing.Size(39, 23);
             this.quit_Tabcontrol.TabIndex = 18;
-            this.quit_Tabcontrol.Text = "x";
+            this.quit_Tabcontrol.Text = "退出";
             this.quit_Tabcontrol.UseVisualStyleBackColor = true;
             this.quit_Tabcontrol.Click += new System.EventHandler(this.Quit_Tabcontrol_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbo_leixing);
+            this.groupBox2.Controls.Add(this.cbo_dengji);
+            this.groupBox2.Controls.Add(this.cbo_zongxin);
+            this.groupBox2.Controls.Add(this.tishi);
             this.groupBox2.Controls.Add(this.label135);
+            this.groupBox2.Controls.Add(this.label25);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label63);
             this.groupBox2.Controls.Add(this.label64);
             this.groupBox2.Controls.Add(this.label65);
+            this.groupBox2.Controls.Add(this.txt_left_optical_cable);
             this.groupBox2.Controls.Add(this.rl1);
             this.groupBox2.Controls.Add(this.rn1);
             this.groupBox2.Controls.Add(this.label66);
@@ -482,21 +564,92 @@
             this.groupBox2.Controls.Add(this.增加线路取消);
             this.groupBox2.Controls.Add(this.增加线路确认);
             this.groupBox2.Controls.Add(this.label81);
-            this.groupBox2.Location = new System.Drawing.Point(22, 244);
+            this.groupBox2.Location = new System.Drawing.Point(11, 341);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(551, 158);
+            this.groupBox2.Size = new System.Drawing.Size(717, 152);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "增加线路";
             // 
+            // cbo_leixing
+            // 
+            this.cbo_leixing.FormattingEnabled = true;
+            this.cbo_leixing.Location = new System.Drawing.Point(446, 61);
+            this.cbo_leixing.Name = "cbo_leixing";
+            this.cbo_leixing.Size = new System.Drawing.Size(59, 20);
+            this.cbo_leixing.TabIndex = 25;
+            this.cbo_leixing.SelectedIndexChanged += new System.EventHandler(this.Cbo_leixing_SelectedIndexChanged);
+            // 
+            // cbo_dengji
+            // 
+            this.cbo_dengji.FormattingEnabled = true;
+            this.cbo_dengji.Location = new System.Drawing.Point(381, 61);
+            this.cbo_dengji.Name = "cbo_dengji";
+            this.cbo_dengji.Size = new System.Drawing.Size(59, 20);
+            this.cbo_dengji.TabIndex = 25;
+            this.cbo_dengji.SelectedIndexChanged += new System.EventHandler(this.Cbo_dengji_SelectedIndexChanged);
+            // 
+            // cbo_zongxin
+            // 
+            this.cbo_zongxin.FormattingEnabled = true;
+            this.cbo_zongxin.Location = new System.Drawing.Point(511, 61);
+            this.cbo_zongxin.Name = "cbo_zongxin";
+            this.cbo_zongxin.Size = new System.Drawing.Size(59, 20);
+            this.cbo_zongxin.TabIndex = 24;
+            this.cbo_zongxin.SelectedIndexChanged += new System.EventHandler(this.Cbo_zongxin_SelectedIndexChanged);
+            // 
+            // tishi
+            // 
+            this.tishi.AutoSize = true;
+            this.tishi.Location = new System.Drawing.Point(641, 67);
+            this.tishi.Name = "tishi";
+            this.tishi.Size = new System.Drawing.Size(0, 12);
+            this.tishi.TabIndex = 23;
+            // 
             // label135
             // 
             this.label135.AutoSize = true;
-            this.label135.Location = new System.Drawing.Point(379, 67);
+            this.label135.Location = new System.Drawing.Point(665, 64);
             this.label135.Name = "label135";
             this.label135.Size = new System.Drawing.Size(11, 12);
             this.label135.TabIndex = 22;
             this.label135.Text = " ";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(574, 46);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(65, 12);
+            this.label25.TabIndex = 21;
+            this.label25.Text = "剩余纤芯数";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(509, 46);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "光缆总芯数";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(450, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "光缆类型";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(387, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "电压等级";
             // 
             // label63
             // 
@@ -510,7 +663,7 @@
             // label64
             // 
             this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(229, 46);
+            this.label64.Location = new System.Drawing.Point(231, 46);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(53, 12);
             this.label64.TabIndex = 20;
@@ -524,6 +677,13 @@
             this.label65.Size = new System.Drawing.Size(53, 12);
             this.label65.TabIndex = 19;
             this.label65.Text = "线路编号";
+            // 
+            // txt_left_optical_cable
+            // 
+            this.txt_left_optical_cable.Location = new System.Drawing.Point(576, 61);
+            this.txt_left_optical_cable.Name = "txt_left_optical_cable";
+            this.txt_left_optical_cable.Size = new System.Drawing.Size(59, 21);
+            this.txt_left_optical_cable.TabIndex = 18;
             // 
             // rl1
             // 
@@ -781,7 +941,7 @@
             // 
             // 增加线路取消
             // 
-            this.增加线路取消.Location = new System.Drawing.Point(301, 101);
+            this.增加线路取消.Location = new System.Drawing.Point(446, 100);
             this.增加线路取消.Name = "增加线路取消";
             this.增加线路取消.Size = new System.Drawing.Size(75, 23);
             this.增加线路取消.TabIndex = 3;
@@ -791,7 +951,7 @@
             // 
             // 增加线路确认
             // 
-            this.增加线路确认.Location = new System.Drawing.Point(62, 100);
+            this.增加线路确认.Location = new System.Drawing.Point(166, 100);
             this.增加线路确认.Name = "增加线路确认";
             this.增加线路确认.Size = new System.Drawing.Size(75, 23);
             this.增加线路确认.TabIndex = 2;
@@ -815,7 +975,7 @@
             this.删除线路.Location = new System.Drawing.Point(4, 22);
             this.删除线路.Name = "删除线路";
             this.删除线路.Padding = new System.Windows.Forms.Padding(3);
-            this.删除线路.Size = new System.Drawing.Size(634, 449);
+            this.删除线路.Size = new System.Drawing.Size(840, 539);
             this.删除线路.TabIndex = 1;
             this.删除线路.Text = "删除线路";
             this.删除线路.UseVisualStyleBackColor = true;
@@ -823,11 +983,11 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(609, 1);
+            this.button1.Location = new System.Drawing.Point(795, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 23);
+            this.button1.Size = new System.Drawing.Size(41, 23);
             this.button1.TabIndex = 19;
-            this.button1.Text = "x";
+            this.button1.Text = "退出";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click_1);
             // 
@@ -846,9 +1006,9 @@
             this.groupBox15.Controls.Add(this.删除线路确认);
             this.groupBox15.Controls.Add(this.delete_r1);
             this.groupBox15.Controls.Add(this.label97);
-            this.groupBox15.Location = new System.Drawing.Point(17, 10);
+            this.groupBox15.Location = new System.Drawing.Point(96, 110);
             this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(561, 168);
+            this.groupBox15.Size = new System.Drawing.Size(562, 170);
             this.groupBox15.TabIndex = 17;
             this.groupBox15.TabStop = false;
             this.groupBox15.Text = "删除线路";
@@ -1150,7 +1310,7 @@
             this.增加节点.Location = new System.Drawing.Point(4, 22);
             this.增加节点.Name = "增加节点";
             this.增加节点.Padding = new System.Windows.Forms.Padding(3);
-            this.增加节点.Size = new System.Drawing.Size(634, 449);
+            this.增加节点.Size = new System.Drawing.Size(840, 539);
             this.增加节点.TabIndex = 2;
             this.增加节点.Text = "增加节点";
             this.增加节点.UseVisualStyleBackColor = true;
@@ -1167,6 +1327,8 @@
             // 
             // show_now_point_dataGridView
             // 
+            this.show_now_point_dataGridView.AllowUserToAddRows = false;
+            this.show_now_point_dataGridView.AllowUserToDeleteRows = false;
             this.show_now_point_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.show_now_point_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.节点编号,
@@ -1209,11 +1371,11 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(606, 3);
+            this.button2.Location = new System.Drawing.Point(795, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(25, 23);
+            this.button2.Size = new System.Drawing.Size(42, 23);
             this.button2.TabIndex = 25;
-            this.button2.Text = "x";
+            this.button2.Text = "退出";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
@@ -1570,7 +1732,6 @@
             this.add_pid1.Name = "add_pid1";
             this.add_pid1.Size = new System.Drawing.Size(48, 21);
             this.add_pid1.TabIndex = 12;
-            this.add_pid1.Text = "8";
             // 
             // 增加节点取消1
             // 
@@ -1617,7 +1778,7 @@
             this.删除节点.Location = new System.Drawing.Point(4, 22);
             this.删除节点.Name = "删除节点";
             this.删除节点.Padding = new System.Windows.Forms.Padding(3);
-            this.删除节点.Size = new System.Drawing.Size(634, 449);
+            this.删除节点.Size = new System.Drawing.Size(840, 539);
             this.删除节点.TabIndex = 3;
             this.删除节点.Text = "删除节点";
             this.删除节点.UseVisualStyleBackColor = true;
@@ -1625,11 +1786,11 @@
             // button3
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(606, 3);
+            this.button3.Location = new System.Drawing.Point(795, 6);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(25, 23);
+            this.button3.Size = new System.Drawing.Size(43, 23);
             this.button3.TabIndex = 23;
-            this.button3.Text = "x";
+            this.button3.Text = "退出";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
@@ -1647,7 +1808,7 @@
             this.groupBox23.Controls.Add(this.删除节点确定);
             this.groupBox23.Controls.Add(this.已有节点);
             this.groupBox23.Controls.Add(this.label134);
-            this.groupBox23.Location = new System.Drawing.Point(11, 17);
+            this.groupBox23.Location = new System.Drawing.Point(96, 110);
             this.groupBox23.Name = "groupBox23";
             this.groupBox23.Size = new System.Drawing.Size(562, 170);
             this.groupBox23.TabIndex = 14;
@@ -1930,192 +2091,959 @@
             this.label134.TabIndex = 0;
             this.label134.Text = "输入节点名称：";
             // 
-            // dataGridView1
+            // 录入光功率
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.dataGridView1.Location = new System.Drawing.Point(41, 71);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(441, 184);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.录入光功率.Controls.Add(this.button4);
+            this.录入光功率.Controls.Add(this.groupBox3);
+            this.录入光功率.Location = new System.Drawing.Point(4, 22);
+            this.录入光功率.Name = "录入光功率";
+            this.录入光功率.Padding = new System.Windows.Forms.Padding(3);
+            this.录入光功率.Size = new System.Drawing.Size(840, 539);
+            this.录入光功率.TabIndex = 4;
+            this.录入光功率.Text = "录入光功率";
+            this.录入光功率.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn1
+            // button4
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(795, 6);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(45, 23);
+            this.button4.TabIndex = 24;
+            this.button4.Text = "退出";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
-            // dataGridViewTextBoxColumn2
+            // groupBox3
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "路径Id";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.groupBox3.Controls.Add(this.date_tishi);
+            this.groupBox3.Controls.Add(this.dateTimePicker1);
+            this.groupBox3.Controls.Add(this.光功率提示信息);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.已有光功率线路下拉列表);
+            this.groupBox3.Controls.Add(this.add_day);
+            this.groupBox3.Controls.Add(this.add_dB);
+            this.groupBox3.Controls.Add(this.add_rn2);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.groupBox4);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.groupBox5);
+            this.groupBox3.Controls.Add(this.label20);
+            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.add_rid2);
+            this.groupBox3.Controls.Add(this.光功率录入取消);
+            this.groupBox3.Controls.Add(this.光功率录入确认);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Location = new System.Drawing.Point(96, 110);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(646, 191);
+            this.groupBox3.TabIndex = 18;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "录入光功率";
             // 
-            // dataGridViewTextBoxColumn3
+            // date_tishi
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "路径名";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.date_tishi.AutoSize = true;
+            this.date_tishi.ForeColor = System.Drawing.Color.Crimson;
+            this.date_tishi.Location = new System.Drawing.Point(449, 84);
+            this.date_tishi.Name = "date_tishi";
+            this.date_tishi.Size = new System.Drawing.Size(137, 12);
+            this.date_tishi.TabIndex = 25;
+            this.date_tishi.Text = "日期格式示例：20191001";
             // 
-            // dataGridViewTextBoxColumn4
+            // dateTimePicker1
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "路径长度";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dateTimePicker1.Location = new System.Drawing.Point(440, 58);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePicker1.TabIndex = 24;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.DateTimePicker1_ValueChanged);
+            // 
+            // 光功率提示信息
+            // 
+            this.光功率提示信息.AutoSize = true;
+            this.光功率提示信息.Location = new System.Drawing.Point(418, 84);
+            this.光功率提示信息.Name = "光功率提示信息";
+            this.光功率提示信息.Size = new System.Drawing.Size(0, 12);
+            this.光功率提示信息.TabIndex = 23;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(485, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(11, 12);
+            this.label1.TabIndex = 22;
+            this.label1.Text = " ";
+            // 
+            // 已有光功率线路下拉列表
+            // 
+            this.已有光功率线路下拉列表.FormattingEnabled = true;
+            this.已有光功率线路下拉列表.Location = new System.Drawing.Point(191, 28);
+            this.已有光功率线路下拉列表.Name = "已有光功率线路下拉列表";
+            this.已有光功率线路下拉列表.Size = new System.Drawing.Size(179, 20);
+            this.已有光功率线路下拉列表.TabIndex = 21;
+            this.已有光功率线路下拉列表.SelectedIndexChanged += new System.EventHandler(this.已有光功率线路下拉列表_SelectedIndexChanged);
+            // 
+            // add_day
+            // 
+            this.add_day.Location = new System.Drawing.Point(370, 79);
+            this.add_day.Name = "add_day";
+            this.add_day.Size = new System.Drawing.Size(72, 21);
+            this.add_day.TabIndex = 20;
+            // 
+            // add_dB
+            // 
+            this.add_dB.Location = new System.Drawing.Point(296, 79);
+            this.add_dB.Name = "add_dB";
+            this.add_dB.Size = new System.Drawing.Size(68, 21);
+            this.add_dB.TabIndex = 20;
+            // 
+            // add_rn2
+            // 
+            this.add_rn2.Enabled = false;
+            this.add_rn2.Location = new System.Drawing.Point(197, 79);
+            this.add_rn2.Name = "add_rn2";
+            this.add_rn2.Size = new System.Drawing.Size(91, 21);
+            this.add_rn2.TabIndex = 19;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(423, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 12);
+            this.label5.TabIndex = 18;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(389, 64);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "日期";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(299, 64);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "光功率/dBm";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(221, 64);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "线路名称";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(139, 64);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "线路编号";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(333, 64);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(0, 12);
+            this.label10.TabIndex = 17;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.textBox4);
+            this.groupBox4.Controls.Add(this.button7);
+            this.groupBox4.Controls.Add(this.button8);
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Location = new System.Drawing.Point(-233, -162);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(332, 107);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "增加线路";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(143, 61);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(242, 21);
+            this.textBox4.TabIndex = 12;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(213, 100);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 3;
+            this.button7.Text = "取消";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(68, 100);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 2;
+            this.button8.Text = "确定";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(60, 64);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 12);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "输入路径信息";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(294, 64);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(11, 12);
+            this.label12.TabIndex = 16;
+            this.label12.Text = " ";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Controls.Add(this.label15);
+            this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this.label17);
+            this.groupBox5.Controls.Add(this.textBox5);
+            this.groupBox5.Controls.Add(this.button9);
+            this.groupBox5.Controls.Add(this.button10);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.label19);
+            this.groupBox5.Location = new System.Drawing.Point(10, 240);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(432, 10);
+            this.groupBox5.TabIndex = 14;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "增加节点";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(294, 64);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(11, 12);
+            this.label13.TabIndex = 17;
+            this.label13.Text = " ";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(294, 67);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(0, 12);
+            this.label14.TabIndex = 16;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(294, 67);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(0, 12);
+            this.label15.TabIndex = 15;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(294, 64);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(0, 12);
+            this.label16.TabIndex = 14;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(294, 64);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(0, 12);
+            this.label17.TabIndex = 13;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(143, 61);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(145, 21);
+            this.textBox5.TabIndex = 12;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(213, 100);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 3;
+            this.button9.Text = "取消";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(62, 100);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 2;
+            this.button10.Text = "确定";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(60, 31);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(65, 12);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "已有节点：";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(60, 64);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(77, 12);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "输入节点信息";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(294, 67);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(0, 12);
+            this.label20.TabIndex = 15;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(294, 64);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(0, 12);
+            this.label21.TabIndex = 14;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(294, 64);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(0, 12);
+            this.label22.TabIndex = 13;
+            // 
+            // add_rid2
+            // 
+            this.add_rid2.Enabled = false;
+            this.add_rid2.Location = new System.Drawing.Point(141, 79);
+            this.add_rid2.Name = "add_rid2";
+            this.add_rid2.Size = new System.Drawing.Size(48, 21);
+            this.add_rid2.TabIndex = 12;
+            // 
+            // 光功率录入取消
+            // 
+            this.光功率录入取消.Location = new System.Drawing.Point(325, 146);
+            this.光功率录入取消.Name = "光功率录入取消";
+            this.光功率录入取消.Size = new System.Drawing.Size(75, 23);
+            this.光功率录入取消.TabIndex = 3;
+            this.光功率录入取消.Text = "取消";
+            this.光功率录入取消.UseVisualStyleBackColor = true;
+            this.光功率录入取消.Click += new System.EventHandler(this.光功率录入取消_Click);
+            // 
+            // 光功率录入确认
+            // 
+            this.光功率录入确认.Location = new System.Drawing.Point(153, 146);
+            this.光功率录入确认.Name = "光功率录入确认";
+            this.光功率录入确认.Size = new System.Drawing.Size(75, 23);
+            this.光功率录入确认.TabIndex = 2;
+            this.光功率录入确认.Text = "添加";
+            this.光功率录入确认.UseVisualStyleBackColor = true;
+            this.光功率录入确认.Click += new System.EventHandler(this.光功率录入确认_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(60, 31);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(125, 12);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "选择要录入光功率线路";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(34, 84);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(101, 12);
+            this.label24.TabIndex = 0;
+            this.label24.Text = "输入光功率信息：";
+            // 
+            // 查看线路和节点
+            // 
+            this.查看线路和节点.Controls.Add(this.button5);
+            this.查看线路和节点.Controls.Add(this.groupBox6);
+            this.查看线路和节点.Location = new System.Drawing.Point(4, 22);
+            this.查看线路和节点.Name = "查看线路和节点";
+            this.查看线路和节点.Padding = new System.Windows.Forms.Padding(3);
+            this.查看线路和节点.Size = new System.Drawing.Size(840, 539);
+            this.查看线路和节点.TabIndex = 5;
+            this.查看线路和节点.Text = "查看线路和节点";
+            this.查看线路和节点.UseVisualStyleBackColor = true;
+            this.查看线路和节点.Click += new System.EventHandler(this.查看线路和节点_Click);
+            // 
+            // button5
+            // 
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(795, 6);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(45, 23);
+            this.button5.TabIndex = 25;
+            this.button5.Text = "退出";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.groupBox1);
+            this.groupBox6.Controls.Add(this.dataGridView1);
+            this.groupBox6.Location = new System.Drawing.Point(11, 36);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(717, 497);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "线路基本信息展示";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dataGridView2);
+            this.groupBox1.Location = new System.Drawing.Point(20, 250);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(697, 241);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
             // 
             // dataGridView2
             // 
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.rID,
             this.urId,
             this.路径名称,
-            this.路径长度,
-            this.pid,
             this.用户节点Id,
             this.lng,
             this.lat,
             this.pname});
-            this.dataGridView2.Location = new System.Drawing.Point(38, 347);
+            this.dataGridView2.Location = new System.Drawing.Point(0, 29);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(745, 156);
-            this.dataGridView2.TabIndex = 3;
-            this.dataGridView2.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataView2_CellEndEdit);
-            // 
-            // rID
-            // 
-            this.rID.HeaderText = "路径序号";
-            this.rID.Name = "rID";
-            this.rID.Width = 78;
+            this.dataGridView2.Size = new System.Drawing.Size(676, 190);
+            this.dataGridView2.TabIndex = 9;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView2_CellContentClick);
             // 
             // urId
             // 
-            this.urId.HeaderText = "路径编号";
+            this.urId.HeaderText = "线路编号";
             this.urId.Name = "urId";
-            this.urId.Width = 78;
             // 
             // 路径名称
             // 
-            this.路径名称.HeaderText = "路径名称";
+            this.路径名称.HeaderText = "线路名称";
             this.路径名称.Name = "路径名称";
-            this.路径名称.Width = 78;
-            // 
-            // 路径长度
-            // 
-            this.路径长度.HeaderText = "路径长度";
-            this.路径长度.Name = "路径长度";
-            this.路径长度.Width = 78;
-            // 
-            // pid
-            // 
-            this.pid.HeaderText = "节点序号";
-            this.pid.Name = "pid";
-            this.pid.Width = 78;
             // 
             // 用户节点Id
             // 
             this.用户节点Id.HeaderText = "节点编号";
             this.用户节点Id.Name = "用户节点Id";
-            this.用户节点Id.Width = 78;
             // 
             // lng
             // 
             this.lng.HeaderText = "节点经度";
             this.lng.Name = "lng";
-            this.lng.Width = 78;
             // 
             // lat
             // 
             this.lat.HeaderText = "节点维度";
             this.lat.Name = "lat";
-            this.lat.Width = 78;
             // 
             // pname
             // 
             this.pname.HeaderText = "节点名称";
             this.pname.Name = "pname";
-            this.pname.Width = 78;
             // 
-            // groupBox1
+            // dataGridView1
             // 
-            this.groupBox1.Controls.Add(this.add_point);
-            this.groupBox1.Location = new System.Drawing.Point(38, 319);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(142, 22);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            this.dataGridView1.Location = new System.Drawing.Point(20, 43);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(676, 201);
+            this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
             // 
-            // add_point
+            // dataGridViewTextBoxColumn1
             // 
-            this.add_point.Controls.Add(this.节点提示);
-            this.add_point.Controls.Add(this.addp);
-            this.add_point.Controls.Add(this.添加节点取消);
-            this.add_point.Controls.Add(this.添加节点确定);
-            this.add_point.Controls.Add(this.已有节点展示);
-            this.add_point.Controls.Add(this.label4);
-            this.add_point.Location = new System.Drawing.Point(118, 20);
-            this.add_point.Name = "add_point";
-            this.add_point.Size = new System.Drawing.Size(430, 156);
-            this.add_point.TabIndex = 13;
-            this.add_point.TabStop = false;
-            this.add_point.Text = "添加节点";
+            this.dataGridViewTextBoxColumn1.HeaderText = "线路编号";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
-            // 节点提示
+            // dataGridViewTextBoxColumn2
             // 
-            this.节点提示.AutoSize = true;
-            this.节点提示.Location = new System.Drawing.Point(294, 64);
-            this.节点提示.Name = "节点提示";
-            this.节点提示.Size = new System.Drawing.Size(0, 12);
-            this.节点提示.TabIndex = 13;
+            this.dataGridViewTextBoxColumn2.HeaderText = "线路名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // addp
+            // dataGridViewTextBoxColumn3
             // 
-            this.addp.Location = new System.Drawing.Point(143, 61);
-            this.addp.Name = "addp";
-            this.addp.Size = new System.Drawing.Size(145, 21);
-            this.addp.TabIndex = 12;
+            this.dataGridViewTextBoxColumn3.HeaderText = "线路长度";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // 添加节点取消
+            // dataGridViewTextBoxColumn4
             // 
-            this.添加节点取消.Location = new System.Drawing.Point(213, 100);
-            this.添加节点取消.Name = "添加节点取消";
-            this.添加节点取消.Size = new System.Drawing.Size(75, 23);
-            this.添加节点取消.TabIndex = 3;
-            this.添加节点取消.Text = "取消";
-            this.添加节点取消.UseVisualStyleBackColor = true;
+            this.dataGridViewTextBoxColumn4.HeaderText = "电压等级";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // 添加节点确定
+            // dataGridViewTextBoxColumn5
             // 
-            this.添加节点确定.Location = new System.Drawing.Point(62, 100);
-            this.添加节点确定.Name = "添加节点确定";
-            this.添加节点确定.Size = new System.Drawing.Size(75, 23);
-            this.添加节点确定.TabIndex = 2;
-            this.添加节点确定.Text = "确定";
-            this.添加节点确定.UseVisualStyleBackColor = true;
+            this.dataGridViewTextBoxColumn5.HeaderText = "光缆类型";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // 已有节点展示
+            // dataGridViewTextBoxColumn6
             // 
-            this.已有节点展示.AutoSize = true;
-            this.已有节点展示.Location = new System.Drawing.Point(60, 31);
-            this.已有节点展示.Name = "已有节点展示";
-            this.已有节点展示.Size = new System.Drawing.Size(65, 12);
-            this.已有节点展示.TabIndex = 0;
-            this.已有节点展示.Text = "已有节点：";
+            this.dataGridViewTextBoxColumn6.HeaderText = "光缆总芯数";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
-            // label4
+            // dataGridViewTextBoxColumn7
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(60, 64);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 12);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "输入节点信息";
+            this.dataGridViewTextBoxColumn7.HeaderText = "剩余纤芯数";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // 录入故障信息
+            // 
+            this.录入故障信息.Controls.Add(this.groupBox7);
+            this.录入故障信息.Location = new System.Drawing.Point(4, 22);
+            this.录入故障信息.Name = "录入故障信息";
+            this.录入故障信息.Padding = new System.Windows.Forms.Padding(3);
+            this.录入故障信息.Size = new System.Drawing.Size(840, 539);
+            this.录入故障信息.TabIndex = 6;
+            this.录入故障信息.Text = "录入故障信息";
+            this.录入故障信息.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.cbo_guzhangleixing);
+            this.groupBox7.Controls.Add(this.label26);
+            this.groupBox7.Controls.Add(this.dateTimePicker2);
+            this.groupBox7.Controls.Add(this.label27);
+            this.groupBox7.Controls.Add(this.label28);
+            this.groupBox7.Controls.Add(this.cbo_guzhangroute);
+            this.groupBox7.Controls.Add(this.txt_addday);
+            this.groupBox7.Controls.Add(this.txt_addrn);
+            this.groupBox7.Controls.Add(this.label29);
+            this.groupBox7.Controls.Add(this.label30);
+            this.groupBox7.Controls.Add(this.label31);
+            this.groupBox7.Controls.Add(this.label32);
+            this.groupBox7.Controls.Add(this.label33);
+            this.groupBox7.Controls.Add(this.label34);
+            this.groupBox7.Controls.Add(this.groupBox8);
+            this.groupBox7.Controls.Add(this.label36);
+            this.groupBox7.Controls.Add(this.groupBox9);
+            this.groupBox7.Controls.Add(this.label44);
+            this.groupBox7.Controls.Add(this.label45);
+            this.groupBox7.Controls.Add(this.label46);
+            this.groupBox7.Controls.Add(this.txt_addrid);
+            this.groupBox7.Controls.Add(this.录入故障取消);
+            this.groupBox7.Controls.Add(this.录入故障);
+            this.groupBox7.Controls.Add(this.label47);
+            this.groupBox7.Controls.Add(this.label48);
+            this.groupBox7.Location = new System.Drawing.Point(97, 174);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(646, 191);
+            this.groupBox7.TabIndex = 19;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "录入故障信息";
+            this.groupBox7.Enter += new System.EventHandler(this.GroupBox7_Enter);
+            // 
+            // cbo_guzhangleixing
+            // 
+            this.cbo_guzhangleixing.FormattingEnabled = true;
+            this.cbo_guzhangleixing.Location = new System.Drawing.Point(294, 79);
+            this.cbo_guzhangleixing.Name = "cbo_guzhangleixing";
+            this.cbo_guzhangleixing.Size = new System.Drawing.Size(70, 20);
+            this.cbo_guzhangleixing.TabIndex = 26;
+            this.cbo_guzhangleixing.SelectedIndexChanged += new System.EventHandler(this.Cbo_guzhangleixing_SelectedIndexChanged);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.ForeColor = System.Drawing.Color.Crimson;
+            this.label26.Location = new System.Drawing.Point(449, 84);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(137, 12);
+            this.label26.TabIndex = 25;
+            this.label26.Text = "日期格式示例：20191001";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(440, 58);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePicker2.TabIndex = 24;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.DateTimePicker2_ValueChanged);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(418, 84);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(0, 12);
+            this.label27.TabIndex = 23;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(485, 84);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(11, 12);
+            this.label28.TabIndex = 22;
+            this.label28.Text = " ";
+            // 
+            // cbo_guzhangroute
+            // 
+            this.cbo_guzhangroute.FormattingEnabled = true;
+            this.cbo_guzhangroute.Location = new System.Drawing.Point(191, 28);
+            this.cbo_guzhangroute.Name = "cbo_guzhangroute";
+            this.cbo_guzhangroute.Size = new System.Drawing.Size(179, 20);
+            this.cbo_guzhangroute.TabIndex = 21;
+            this.cbo_guzhangroute.SelectedIndexChanged += new System.EventHandler(this.Cbo_guzhangroute_SelectedIndexChanged);
+            // 
+            // txt_addday
+            // 
+            this.txt_addday.Location = new System.Drawing.Point(370, 79);
+            this.txt_addday.Name = "txt_addday";
+            this.txt_addday.Size = new System.Drawing.Size(72, 21);
+            this.txt_addday.TabIndex = 20;
+            // 
+            // txt_addrn
+            // 
+            this.txt_addrn.Enabled = false;
+            this.txt_addrn.Location = new System.Drawing.Point(197, 79);
+            this.txt_addrn.Name = "txt_addrn";
+            this.txt_addrn.Size = new System.Drawing.Size(91, 21);
+            this.txt_addrn.TabIndex = 19;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(423, 64);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(0, 12);
+            this.label29.TabIndex = 18;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(389, 64);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(29, 12);
+            this.label30.TabIndex = 18;
+            this.label30.Text = "日期";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(299, 64);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(53, 12);
+            this.label31.TabIndex = 18;
+            this.label31.Text = "故障类型";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(221, 64);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(53, 12);
+            this.label32.TabIndex = 18;
+            this.label32.Text = "线路名称";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(139, 64);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(53, 12);
+            this.label33.TabIndex = 18;
+            this.label33.Text = "线路编号";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(333, 64);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(0, 12);
+            this.label34.TabIndex = 17;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.textBox6);
+            this.groupBox8.Controls.Add(this.button6);
+            this.groupBox8.Controls.Add(this.button11);
+            this.groupBox8.Controls.Add(this.label35);
+            this.groupBox8.Location = new System.Drawing.Point(-233, -162);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(332, 107);
+            this.groupBox8.TabIndex = 6;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "增加线路";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(143, 61);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(242, 21);
+            this.textBox6.TabIndex = 12;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(213, 100);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 3;
+            this.button6.Text = "取消";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(68, 100);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "确定";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(60, 64);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(77, 12);
+            this.label35.TabIndex = 0;
+            this.label35.Text = "输入路径信息";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(294, 64);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(11, 12);
+            this.label36.TabIndex = 16;
+            this.label36.Text = " ";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label37);
+            this.groupBox9.Controls.Add(this.label38);
+            this.groupBox9.Controls.Add(this.label39);
+            this.groupBox9.Controls.Add(this.label40);
+            this.groupBox9.Controls.Add(this.label41);
+            this.groupBox9.Controls.Add(this.textBox7);
+            this.groupBox9.Controls.Add(this.button12);
+            this.groupBox9.Controls.Add(this.button13);
+            this.groupBox9.Controls.Add(this.label42);
+            this.groupBox9.Controls.Add(this.label43);
+            this.groupBox9.Location = new System.Drawing.Point(10, 240);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(432, 10);
+            this.groupBox9.TabIndex = 14;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "增加节点";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(294, 64);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(11, 12);
+            this.label37.TabIndex = 17;
+            this.label37.Text = " ";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(294, 67);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(0, 12);
+            this.label38.TabIndex = 16;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(294, 67);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(0, 12);
+            this.label39.TabIndex = 15;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(294, 64);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(0, 12);
+            this.label40.TabIndex = 14;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(294, 64);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(0, 12);
+            this.label41.TabIndex = 13;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(143, 61);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(145, 21);
+            this.textBox7.TabIndex = 12;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(213, 100);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.TabIndex = 3;
+            this.button12.Text = "取消";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(62, 100);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 2;
+            this.button13.Text = "确定";
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(60, 31);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(65, 12);
+            this.label42.TabIndex = 0;
+            this.label42.Text = "已有节点：";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(60, 64);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(77, 12);
+            this.label43.TabIndex = 0;
+            this.label43.Text = "输入节点信息";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(294, 67);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(0, 12);
+            this.label44.TabIndex = 15;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(294, 64);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(0, 12);
+            this.label45.TabIndex = 14;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(294, 64);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(0, 12);
+            this.label46.TabIndex = 13;
+            // 
+            // txt_addrid
+            // 
+            this.txt_addrid.Enabled = false;
+            this.txt_addrid.Location = new System.Drawing.Point(141, 79);
+            this.txt_addrid.Name = "txt_addrid";
+            this.txt_addrid.Size = new System.Drawing.Size(48, 21);
+            this.txt_addrid.TabIndex = 12;
+            // 
+            // 录入故障取消
+            // 
+            this.录入故障取消.Location = new System.Drawing.Point(325, 146);
+            this.录入故障取消.Name = "录入故障取消";
+            this.录入故障取消.Size = new System.Drawing.Size(75, 23);
+            this.录入故障取消.TabIndex = 3;
+            this.录入故障取消.Text = "取消";
+            this.录入故障取消.UseVisualStyleBackColor = true;
+            this.录入故障取消.Click += new System.EventHandler(this.录入故障取消_Click);
+            // 
+            // 录入故障
+            // 
+            this.录入故障.Location = new System.Drawing.Point(153, 146);
+            this.录入故障.Name = "录入故障";
+            this.录入故障.Size = new System.Drawing.Size(75, 23);
+            this.录入故障.TabIndex = 2;
+            this.录入故障.Text = "添加";
+            this.录入故障.UseVisualStyleBackColor = true;
+            this.录入故障.Click += new System.EventHandler(this.录入故障_Click);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(60, 31);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(125, 12);
+            this.label47.TabIndex = 0;
+            this.label47.Text = "选择要录入光功率线路";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(34, 84);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(101, 12);
+            this.label48.TabIndex = 0;
+            this.label48.Text = "输入光功率信息：";
             // 
             // gMap1
             // 
@@ -2144,7 +3072,7 @@
             this.gMap1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMap1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMap1.ShowTileGridLines = false;
-            this.gMap1.Size = new System.Drawing.Size(826, 511);
+            this.gMap1.Size = new System.Drawing.Size(930, 591);
             this.gMap1.TabIndex = 2;
             this.gMap1.Zoom = 0D;
             this.gMap1.Load += new System.EventHandler(this.GMap1_Load);
@@ -2152,33 +3080,25 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.管理ToolStripMenuItem,
             this.线路管理ToolStripMenuItem,
             this.节点管理ToolStripMenuItem,
-            this.路径信息ToolStripMenuItem,
-            this.节点信息ToolStripMenuItem});
+            this.统计分析ToolStripMenuItem,
+            this.管理ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(829, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(930, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // 管理ToolStripMenuItem
-            // 
-            this.管理ToolStripMenuItem.Name = "管理ToolStripMenuItem";
-            this.管理ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.管理ToolStripMenuItem.Text = "管理";
             // 
             // 线路管理ToolStripMenuItem
             // 
             this.线路管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.增加线路ToolStripMenuItem,
             this.删除线路ToolStripMenuItem1,
-            this.更改线路ToolStripMenuItem,
-            this.查询线路ToolStripMenuItem});
+            this.查看线路ToolStripMenuItem});
             this.线路管理ToolStripMenuItem.Name = "线路管理ToolStripMenuItem";
-            this.线路管理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.线路管理ToolStripMenuItem.Text = "线路管理";
+            this.线路管理ToolStripMenuItem.Size = new System.Drawing.Size(92, 21);
+            this.线路管理ToolStripMenuItem.Text = "光纤线路管理";
             // 
             // 增加线路ToolStripMenuItem
             // 
@@ -2194,28 +3114,22 @@
             this.删除线路ToolStripMenuItem1.Text = "删除线路";
             this.删除线路ToolStripMenuItem1.Click += new System.EventHandler(this.删除线路ToolStripMenuItem1_Click);
             // 
-            // 更改线路ToolStripMenuItem
+            // 查看线路ToolStripMenuItem
             // 
-            this.更改线路ToolStripMenuItem.Name = "更改线路ToolStripMenuItem";
-            this.更改线路ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.更改线路ToolStripMenuItem.Text = "更改线路";
-            // 
-            // 查询线路ToolStripMenuItem
-            // 
-            this.查询线路ToolStripMenuItem.Name = "查询线路ToolStripMenuItem";
-            this.查询线路ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.查询线路ToolStripMenuItem.Text = "查询线路";
+            this.查看线路ToolStripMenuItem.Name = "查看线路ToolStripMenuItem";
+            this.查看线路ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.查看线路ToolStripMenuItem.Text = "查看线路";
+            this.查看线路ToolStripMenuItem.Click += new System.EventHandler(this.查看线路ToolStripMenuItem_Click);
             // 
             // 节点管理ToolStripMenuItem
             // 
             this.节点管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.增加节点ToolStripMenuItem1,
             this.删除节点ToolStripMenuItem1,
-            this.更改节点ToolStripMenuItem,
-            this.查询节点ToolStripMenuItem});
+            this.查看节点ToolStripMenuItem});
             this.节点管理ToolStripMenuItem.Name = "节点管理ToolStripMenuItem";
-            this.节点管理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.节点管理ToolStripMenuItem.Text = "节点管理";
+            this.节点管理ToolStripMenuItem.Size = new System.Drawing.Size(116, 21);
+            this.节点管理ToolStripMenuItem.Text = "光纤线路节点管理";
             // 
             // 增加节点ToolStripMenuItem1
             // 
@@ -2231,31 +3145,75 @@
             this.删除节点ToolStripMenuItem1.Text = "删除节点";
             this.删除节点ToolStripMenuItem1.Click += new System.EventHandler(this.删除节点ToolStripMenuItem1_Click);
             // 
-            // 更改节点ToolStripMenuItem
+            // 查看节点ToolStripMenuItem
             // 
-            this.更改节点ToolStripMenuItem.Name = "更改节点ToolStripMenuItem";
-            this.更改节点ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.更改节点ToolStripMenuItem.Text = "更改节点";
+            this.查看节点ToolStripMenuItem.Name = "查看节点ToolStripMenuItem";
+            this.查看节点ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.查看节点ToolStripMenuItem.Text = "查看节点";
+            this.查看节点ToolStripMenuItem.Click += new System.EventHandler(this.查看节点ToolStripMenuItem_Click);
             // 
-            // 查询节点ToolStripMenuItem
+            // 统计分析ToolStripMenuItem
             // 
-            this.查询节点ToolStripMenuItem.Name = "查询节点ToolStripMenuItem";
-            this.查询节点ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.查询节点ToolStripMenuItem.Text = "查询节点";
+            this.统计分析ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.空芯率统计分析ToolStripMenuItem,
+            this.故障统计分析ToolStripMenuItem,
+            this.故障信息录入ToolStripMenuItem,
+            this.备纤衰耗分析ToolStripMenuItem});
+            this.统计分析ToolStripMenuItem.Name = "统计分析ToolStripMenuItem";
+            this.统计分析ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.统计分析ToolStripMenuItem.Text = "统计分析";
+            this.统计分析ToolStripMenuItem.Click += new System.EventHandler(this.统计分析ToolStripMenuItem_Click);
             // 
-            // 路径信息ToolStripMenuItem
+            // 空芯率统计分析ToolStripMenuItem
             // 
-            this.路径信息ToolStripMenuItem.Name = "路径信息ToolStripMenuItem";
-            this.路径信息ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.路径信息ToolStripMenuItem.Text = "路径信息";
-            this.路径信息ToolStripMenuItem.Click += new System.EventHandler(this.路径信息ToolStripMenuItem_Click);
+            this.空芯率统计分析ToolStripMenuItem.Name = "空芯率统计分析ToolStripMenuItem";
+            this.空芯率统计分析ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.空芯率统计分析ToolStripMenuItem.Text = "空芯率统计分析";
+            this.空芯率统计分析ToolStripMenuItem.Click += new System.EventHandler(this.空芯率统计分析ToolStripMenuItem_Click);
             // 
-            // 节点信息ToolStripMenuItem
+            // 故障统计分析ToolStripMenuItem
             // 
-            this.节点信息ToolStripMenuItem.Name = "节点信息ToolStripMenuItem";
-            this.节点信息ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.节点信息ToolStripMenuItem.Text = "节点信息";
-            this.节点信息ToolStripMenuItem.Click += new System.EventHandler(this.节点信息ToolStripMenuItem_Click);
+            this.故障统计分析ToolStripMenuItem.Name = "故障统计分析ToolStripMenuItem";
+            this.故障统计分析ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.故障统计分析ToolStripMenuItem.Text = "故障统计分析";
+            this.故障统计分析ToolStripMenuItem.Click += new System.EventHandler(this.故障统计分析ToolStripMenuItem_Click);
+            // 
+            // 故障信息录入ToolStripMenuItem
+            // 
+            this.故障信息录入ToolStripMenuItem.Name = "故障信息录入ToolStripMenuItem";
+            this.故障信息录入ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.故障信息录入ToolStripMenuItem.Text = "故障信息录入";
+            this.故障信息录入ToolStripMenuItem.Click += new System.EventHandler(this.故障信息录入ToolStripMenuItem_Click);
+            // 
+            // 备纤衰耗分析ToolStripMenuItem
+            // 
+            this.备纤衰耗分析ToolStripMenuItem.Name = "备纤衰耗分析ToolStripMenuItem";
+            this.备纤衰耗分析ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.备纤衰耗分析ToolStripMenuItem.Text = "备纤衰耗分析";
+            this.备纤衰耗分析ToolStripMenuItem.Click += new System.EventHandler(this.备纤衰耗分析ToolStripMenuItem_Click);
+            // 
+            // 管理ToolStripMenuItem
+            // 
+            this.管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.光功率录入ToolStripMenuItem,
+            this.光功率预测toolStripMenuItem1});
+            this.管理ToolStripMenuItem.Name = "管理ToolStripMenuItem";
+            this.管理ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
+            this.管理ToolStripMenuItem.Text = "光功率预测";
+            // 
+            // 光功率录入ToolStripMenuItem
+            // 
+            this.光功率录入ToolStripMenuItem.Name = "光功率录入ToolStripMenuItem";
+            this.光功率录入ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.光功率录入ToolStripMenuItem.Text = "录入光功率";
+            this.光功率录入ToolStripMenuItem.Click += new System.EventHandler(this.光功率录入ToolStripMenuItem_Click);
+            // 
+            // 光功率预测toolStripMenuItem1
+            // 
+            this.光功率预测toolStripMenuItem1.Name = "光功率预测toolStripMenuItem1";
+            this.光功率预测toolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
+            this.光功率预测toolStripMenuItem1.Text = "预测光功率";
+            this.光功率预测toolStripMenuItem1.Click += new System.EventHandler(this.光功率预测toolStripMenuItem1_Click);
             // 
             // gMap
             // 
@@ -2284,21 +3242,29 @@
             this.gMap.Size = new System.Drawing.Size(0, 0);
             this.gMap.TabIndex = 0;
             this.gMap.Zoom = 0D;
-            this.gMap.Load += new System.EventHandler(this.GMapControl1_Load);
+            // 
+            // ditucaozuo
+            // 
+            this.ditucaozuo.AutoSize = true;
+            this.ditucaozuo.Location = new System.Drawing.Point(137, 39);
+            this.ditucaozuo.Name = "ditucaozuo";
+            this.ditucaozuo.Size = new System.Drawing.Size(53, 12);
+            this.ditucaozuo.TabIndex = 20;
+            this.ditucaozuo.Text = "地图操作";
             // 
             // route_init
             // 
-            this.route_init.Location = new System.Drawing.Point(121, 325);
+            this.route_init.Location = new System.Drawing.Point(126, 480);
             this.route_init.Name = "route_init";
             this.route_init.Size = new System.Drawing.Size(75, 23);
             this.route_init.TabIndex = 18;
-            this.route_init.Text = "线路初始化";
+            this.route_init.Text = "线路更新";
             this.route_init.UseVisualStyleBackColor = true;
             this.route_init.Click += new System.EventHandler(this.Route_init_Click);
             // 
             // Delete_Route
             // 
-            this.Delete_Route.Location = new System.Drawing.Point(121, 294);
+            this.Delete_Route.Location = new System.Drawing.Point(126, 307);
             this.Delete_Route.Name = "Delete_Route";
             this.Delete_Route.Size = new System.Drawing.Size(75, 23);
             this.Delete_Route.TabIndex = 18;
@@ -2308,273 +3274,13 @@
             // 
             // delete_Marker
             // 
-            this.delete_Marker.Location = new System.Drawing.Point(121, 262);
+            this.delete_Marker.Location = new System.Drawing.Point(126, 131);
             this.delete_Marker.Name = "delete_Marker";
             this.delete_Marker.Size = new System.Drawing.Size(75, 23);
             this.delete_Marker.TabIndex = 17;
             this.delete_Marker.Text = "清除标记";
             this.delete_Marker.UseVisualStyleBackColor = true;
             this.delete_Marker.Click += new System.EventHandler(this.Delete_Marker_Click);
-            // 
-            // E_name
-            // 
-            this.E_name.Location = new System.Drawing.Point(143, 140);
-            this.E_name.Name = "E_name";
-            this.E_name.Size = new System.Drawing.Size(83, 21);
-            this.E_name.TabIndex = 11;
-            // 
-            // S_name
-            // 
-            this.S_name.Location = new System.Drawing.Point(33, 140);
-            this.S_name.Name = "S_name";
-            this.S_name.Size = new System.Drawing.Size(73, 21);
-            this.S_name.TabIndex = 11;
-            // 
-            // xianxin
-            // 
-            this.xianxin.AutoSize = true;
-            this.xianxin.Location = new System.Drawing.Point(132, 172);
-            this.xianxin.Name = "xianxin";
-            this.xianxin.Size = new System.Drawing.Size(41, 12);
-            this.xianxin.TabIndex = 10;
-            this.xianxin.Text = "纤芯数";
-            // 
-            // Ename
-            // 
-            this.Ename.AutoSize = true;
-            this.Ename.Location = new System.Drawing.Point(112, 143);
-            this.Ename.Name = "Ename";
-            this.Ename.Size = new System.Drawing.Size(29, 12);
-            this.Ename.TabIndex = 10;
-            this.Ename.Text = "终点";
-            // 
-            // Sname
-            // 
-            this.Sname.AutoSize = true;
-            this.Sname.Location = new System.Drawing.Point(4, 143);
-            this.Sname.Name = "Sname";
-            this.Sname.Size = new System.Drawing.Size(29, 12);
-            this.Sname.TabIndex = 10;
-            this.Sname.Text = "起点";
-            // 
-            // R_name
-            // 
-            this.R_name.Location = new System.Drawing.Point(142, 113);
-            this.R_name.Name = "R_name";
-            this.R_name.Size = new System.Drawing.Size(84, 21);
-            this.R_name.TabIndex = 11;
-            // 
-            // Routename
-            // 
-            this.Routename.AutoSize = true;
-            this.Routename.Location = new System.Drawing.Point(112, 116);
-            this.Routename.Name = "Routename";
-            this.Routename.Size = new System.Drawing.Size(29, 12);
-            this.Routename.TabIndex = 10;
-            this.Routename.Text = "路名";
-            // 
-            // xianxinshu
-            // 
-            this.xianxinshu.Location = new System.Drawing.Point(179, 169);
-            this.xianxinshu.Name = "xianxinshu";
-            this.xianxinshu.Size = new System.Drawing.Size(47, 21);
-            this.xianxinshu.TabIndex = 11;
-            // 
-            // length
-            // 
-            this.length.Location = new System.Drawing.Point(57, 166);
-            this.length.Name = "length";
-            this.length.Size = new System.Drawing.Size(69, 21);
-            this.length.TabIndex = 11;
-            // 
-            // RouteId
-            // 
-            this.RouteId.Location = new System.Drawing.Point(32, 114);
-            this.RouteId.Name = "RouteId";
-            this.RouteId.Size = new System.Drawing.Size(74, 21);
-            this.RouteId.TabIndex = 11;
-            // 
-            // R_length
-            // 
-            this.R_length.AutoSize = true;
-            this.R_length.Location = new System.Drawing.Point(5, 172);
-            this.R_length.Name = "R_length";
-            this.R_length.Size = new System.Drawing.Size(53, 12);
-            this.R_length.TabIndex = 10;
-            this.R_length.Text = "线路长度";
-            // 
-            // Id
-            // 
-            this.Id.AutoSize = true;
-            this.Id.Location = new System.Drawing.Point(4, 122);
-            this.Id.Name = "Id";
-            this.Id.Size = new System.Drawing.Size(29, 12);
-            this.Id.TabIndex = 10;
-            this.Id.Text = "编号";
-            // 
-            // 添加线路
-            // 
-            this.添加线路.Location = new System.Drawing.Point(160, 212);
-            this.添加线路.Name = "添加线路";
-            this.添加线路.Size = new System.Drawing.Size(66, 23);
-            this.添加线路.TabIndex = 9;
-            this.添加线路.Text = "添加线路";
-            this.添加线路.UseVisualStyleBackColor = true;
-            this.添加线路.Click += new System.EventHandler(this.添加线路_Click);
-            // 
-            // ADDR
-            // 
-            this.ADDR.Location = new System.Drawing.Point(5, 294);
-            this.ADDR.Name = "ADDR";
-            this.ADDR.Size = new System.Drawing.Size(75, 23);
-            this.ADDR.TabIndex = 8;
-            this.ADDR.Text = "绘制线路";
-            this.ADDR.UseVisualStyleBackColor = true;
-            this.ADDR.Click += new System.EventHandler(this.ADDR_Click);
-            // 
-            // stringToDouble
-            // 
-            this.stringToDouble.Location = new System.Drawing.Point(7, 322);
-            this.stringToDouble.Name = "stringToDouble";
-            this.stringToDouble.Size = new System.Drawing.Size(75, 23);
-            this.stringToDouble.TabIndex = 7;
-            this.stringToDouble.Text = "turn";
-            this.stringToDouble.UseVisualStyleBackColor = true;
-            this.stringToDouble.Click += new System.EventHandler(this.StringToDouble_Click);
-            // 
-            // listView1
-            // 
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(5, 435);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 97);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
-            // 
-            // btn_Add_Click
-            // 
-            this.btn_Add_Click.Location = new System.Drawing.Point(5, 538);
-            this.btn_Add_Click.Name = "btn_Add_Click";
-            this.btn_Add_Click.Size = new System.Drawing.Size(75, 23);
-            this.btn_Add_Click.TabIndex = 5;
-            this.btn_Add_Click.Text = "showSQL";
-            this.btn_Add_Click.UseVisualStyleBackColor = true;
-            this.btn_Add_Click.Click += new System.EventHandler(this.Btn_Add_Click_Click);
-            // 
-            // AddSQL
-            // 
-            this.AddSQL.FormattingEnabled = true;
-            this.AddSQL.ItemHeight = 12;
-            this.AddSQL.Location = new System.Drawing.Point(5, 435);
-            this.AddSQL.Name = "AddSQL";
-            this.AddSQL.Size = new System.Drawing.Size(120, 88);
-            this.AddSQL.TabIndex = 4;
-            // 
-            // openchild
-            // 
-            this.openchild.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.openchild.Location = new System.Drawing.Point(5, 265);
-            this.openchild.Name = "openchild";
-            this.openchild.Size = new System.Drawing.Size(75, 23);
-            this.openchild.TabIndex = 3;
-            this.openchild.Text = "openchild";
-            this.openchild.UseVisualStyleBackColor = true;
-            this.openchild.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // end
-            // 
-            this.end.AutoSize = true;
-            this.end.Location = new System.Drawing.Point(3, 71);
-            this.end.Name = "end";
-            this.end.Size = new System.Drawing.Size(29, 12);
-            this.end.TabIndex = 3;
-            this.end.Text = "终点";
-            // 
-            // start
-            // 
-            this.start.AutoSize = true;
-            this.start.Location = new System.Drawing.Point(3, 26);
-            this.start.Name = "start";
-            this.start.Size = new System.Drawing.Size(29, 12);
-            this.start.TabIndex = 3;
-            this.start.Text = "起点";
-            // 
-            // 添加路径
-            // 
-            this.添加路径.Location = new System.Drawing.Point(33, 212);
-            this.添加路径.Name = "添加路径";
-            this.添加路径.Size = new System.Drawing.Size(73, 23);
-            this.添加路径.TabIndex = 2;
-            this.添加路径.Text = "录入节点";
-            this.添加路径.UseVisualStyleBackColor = true;
-            this.添加路径.Click += new System.EventHandler(this.添加路径_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 90);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "维度";
-            this.label3.Click += new System.EventHandler(this.经度_Click);
-            // 
-            // 经度
-            // 
-            this.经度.AutoSize = true;
-            this.经度.Location = new System.Drawing.Point(43, 38);
-            this.经度.Name = "经度";
-            this.经度.Size = new System.Drawing.Size(29, 12);
-            this.经度.TabIndex = 1;
-            this.经度.Text = "维度";
-            this.经度.Click += new System.EventHandler(this.经度_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "经度";
-            // 
-            // 纬度
-            // 
-            this.纬度.AutoSize = true;
-            this.纬度.Location = new System.Drawing.Point(43, 11);
-            this.纬度.Name = "纬度";
-            this.纬度.Size = new System.Drawing.Size(29, 12);
-            this.纬度.TabIndex = 1;
-            this.纬度.Text = "经度";
-            // 
-            // end_lng
-            // 
-            this.end_lng.Location = new System.Drawing.Point(80, 86);
-            this.end_lng.Name = "end_lng";
-            this.end_lng.Size = new System.Drawing.Size(110, 21);
-            this.end_lng.TabIndex = 0;
-            // 
-            // start_lng
-            // 
-            this.start_lng.Location = new System.Drawing.Point(80, 35);
-            this.start_lng.Name = "start_lng";
-            this.start_lng.Size = new System.Drawing.Size(110, 21);
-            this.start_lng.TabIndex = 0;
-            // 
-            // end_lat
-            // 
-            this.end_lat.Location = new System.Drawing.Point(80, 59);
-            this.end_lat.Name = "end_lat";
-            this.end_lat.Size = new System.Drawing.Size(110, 21);
-            this.end_lat.TabIndex = 0;
-            // 
-            // start_lat
-            // 
-            this.start_lat.Location = new System.Drawing.Point(80, 8);
-            this.start_lat.Name = "start_lat";
-            this.start_lat.Size = new System.Drawing.Size(110, 21);
-            this.start_lat.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
@@ -2612,13 +3318,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1117, 537);
+            this.ClientSize = new System.Drawing.Size(1256, 617);
             this.Controls.Add(this.splitContainer1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "电力光缆辅助分析管理系统";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.Form1_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -2627,7 +3335,7 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.TabControl_1.ResumeLayout(false);
             this.增加线路.ResumeLayout(false);
             this.Show_now_route.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.show_now_route_dataGridView)).EndInit();
@@ -2666,11 +3374,25 @@
             this.groupBox25.PerformLayout();
             this.groupBox26.ResumeLayout(false);
             this.groupBox26.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.录入光功率.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.查看线路和节点.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.add_point.ResumeLayout(false);
-            this.add_point.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.录入故障信息.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -2683,60 +3405,36 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private GMap.NET.WindowsForms.GMapControl gMap;
-        private System.Windows.Forms.TextBox start_lat;
-        private System.Windows.Forms.Label start;
-        private System.Windows.Forms.Button 添加路径;
-        private System.Windows.Forms.Label 经度;
-        private System.Windows.Forms.Label 纬度;
-        private System.Windows.Forms.Label end;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox end_lat;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox end_lng;
-        private System.Windows.Forms.TextBox start_lng;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 添加节点ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 添加边ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改节点ToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
-        private System.Windows.Forms.Button openchild;
-        private System.Windows.Forms.Button btn_Add_Click;
-        private System.Windows.Forms.ListBox AddSQL;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button stringToDouble;
-        private System.Windows.Forms.Button ADDR;
-        private System.Windows.Forms.Button 添加线路;
-        private System.Windows.Forms.Label Id;
-        private System.Windows.Forms.TextBox RouteId;
-        private System.Windows.Forms.TextBox E_name;
-        private System.Windows.Forms.TextBox S_name;
-        private System.Windows.Forms.Label Ename;
-        private System.Windows.Forms.Label Sname;
-        private System.Windows.Forms.TextBox R_name;
-        private System.Windows.Forms.Label Routename;
-        private System.Windows.Forms.Label xianxin;
-        private System.Windows.Forms.TextBox length;
-        private System.Windows.Forms.Label R_length;
-        private System.Windows.Forms.TextBox xianxinshu;
         private GMap.NET.WindowsForms.GMapControl gMap1;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox add_point;
-        private System.Windows.Forms.Label 节点提示;
-        private System.Windows.Forms.TextBox addp;
-        private System.Windows.Forms.Button 添加节点取消;
-        private System.Windows.Forms.Button 添加节点确定;
-        private System.Windows.Forms.Label 已有节点展示;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.Button delete_Marker;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 线路管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 增加线路ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除线路ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 查看线路ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 节点管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 增加节点ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 删除节点ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 查看节点ToolStripMenuItem;
+        private System.Windows.Forms.Button buttonZoomDown;
+        private System.Windows.Forms.Button buttonZoomUp_Click;
+        private System.Windows.Forms.Button Delete_Route;
+        private System.Windows.Forms.Button route_init;
+        private System.Windows.Forms.ToolStripMenuItem 光功率录入ToolStripMenuItem;
+        private System.Windows.Forms.TabControl TabControl_1;
         private System.Windows.Forms.TabPage 增加线路;
+        private System.Windows.Forms.GroupBox Show_now_route;
+        private System.Windows.Forms.DataGridView show_now_route_dataGridView;
+        private System.Windows.Forms.Button quit_Tabcontrol;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label135;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.Label label65;
@@ -2772,6 +3470,7 @@
         private System.Windows.Forms.Button 增加线路确认;
         private System.Windows.Forms.Label label81;
         private System.Windows.Forms.TabPage 删除线路;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.ComboBox 已有线路显示下拉列表2;
         private System.Windows.Forms.TextBox 待删除线路;
@@ -2805,7 +3504,19 @@
         private System.Windows.Forms.Label delete_r1;
         private System.Windows.Forms.Label label97;
         private System.Windows.Forms.TabPage 增加节点;
+        private System.Windows.Forms.GroupBox Show_now_point;
+        private System.Windows.Forms.DataGridView show_now_point_dataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 节点编号;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 节点维度;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 节点经度;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 节点名称;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 线路编号;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.Button drawLine;
+        private System.Windows.Forms.Button add_con;
+        private System.Windows.Forms.Button add_over;
+        private System.Windows.Forms.Label 增加节点提示信息2;
         private System.Windows.Forms.ComboBox 已有线路显示下拉列表;
         private System.Windows.Forms.TextBox add_pname1;
         private System.Windows.Forms.TextBox add_lng1经度;
@@ -2843,6 +3554,7 @@
         private System.Windows.Forms.Label 显示已有节点;
         private System.Windows.Forms.Label label119;
         private System.Windows.Forms.TabPage 删除节点;
+        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox23;
         private System.Windows.Forms.ComboBox 已有节点显示下拉列表3;
         private System.Windows.Forms.GroupBox groupBox24;
@@ -2874,55 +3586,131 @@
         private System.Windows.Forms.Button 删除节点确定;
         private System.Windows.Forms.Label 已有节点;
         private System.Windows.Forms.Label label134;
-        private System.Windows.Forms.Label label135;
-        private System.Windows.Forms.Label 增加节点提示信息2;
-        private System.Windows.Forms.Button add_over;
-        private System.Windows.Forms.Button add_con;
-        private System.Windows.Forms.Button delete_Marker;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rID;
+        private System.Windows.Forms.TabPage 录入光功率;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label 光功率提示信息;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox 已有光功率线路下拉列表;
+        private System.Windows.Forms.TextBox add_day;
+        private System.Windows.Forms.TextBox add_dB;
+        private System.Windows.Forms.TextBox add_rn2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox add_rid2;
+        private System.Windows.Forms.Button 光功率录入取消;
+        private System.Windows.Forms.Button 光功率录入确认;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label date_tishi;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ToolStripMenuItem 统计分析ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 光功率预测toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 空芯率统计分析ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 故障统计分析ToolStripMenuItem;
+        private System.Windows.Forms.Label ditucaozuo;
+        private System.Windows.Forms.ToolStripMenuItem 故障信息录入ToolStripMenuItem;
+        private System.Windows.Forms.TabPage 查看线路和节点;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn urId;
         private System.Windows.Forms.DataGridViewTextBoxColumn 路径名称;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 路径长度;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn 用户节点Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn lng;
         private System.Windows.Forms.DataGridViewTextBoxColumn lat;
         private System.Windows.Forms.DataGridViewTextBoxColumn pname;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 线路管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 增加线路ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 删除线路ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 更改线路ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 查询线路ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 节点管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 增加节点ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 删除节点ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 更改节点ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 查询节点ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 路径信息ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 节点信息ToolStripMenuItem;
-        private System.Windows.Forms.Button buttonZoomDown;
-        private System.Windows.Forms.Button buttonZoomUp_Click;
-        private System.Windows.Forms.Button Delete_Route;
-        private System.Windows.Forms.Button quit_Tabcontrol;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.GroupBox Show_now_point;
-        private System.Windows.Forms.DataGridView show_now_point_dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 节点编号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 节点维度;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 节点经度;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 节点名称;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 线路编号;
-        private System.Windows.Forms.GroupBox Show_now_route;
-        private System.Windows.Forms.DataGridView show_now_route_dataGridView;
+        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridViewTextBoxColumn 线路编号1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 线路名称;
         private System.Windows.Forms.DataGridViewTextBoxColumn 线路长度;
-        private System.Windows.Forms.Button drawLine;
-        private System.Windows.Forms.Button route_init;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 电压等级;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 光缆类型;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 光缆总芯数;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 剩余纤芯数;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txt_left_optical_cable;
+        private System.Windows.Forms.Label tishi;
+        private System.Windows.Forms.ComboBox cbo_leixing;
+        private System.Windows.Forms.ComboBox cbo_dengji;
+        private System.Windows.Forms.ComboBox cbo_zongxin;
+        private System.Windows.Forms.TabPage 录入故障信息;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.ComboBox cbo_guzhangroute;
+        private System.Windows.Forms.TextBox txt_addday;
+        private System.Windows.Forms.TextBox txt_addrn;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox txt_addrid;
+        private System.Windows.Forms.Button 录入故障取消;
+        private System.Windows.Forms.Button 录入故障;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.ComboBox cbo_guzhangleixing;
+        private System.Windows.Forms.ToolStripMenuItem 备纤衰耗分析ToolStripMenuItem;
     }
 }
 

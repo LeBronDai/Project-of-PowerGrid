@@ -8,10 +8,27 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>WindowsFormsApp1</RootNamespace>
     <AssemblyName>WindowsFormsApp1</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>D:\国网项目2019年5月-11月\11月19日最后版备份\publish\Application Files\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,9 +49,71 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LibMATLAB|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\LibMATLAB\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LibMATLAB|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\LibMATLAB\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>B1A4BAA1FC717A3D70A809294EC5B976C2F84ADB</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>WindowsFormsApp1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>全球图标.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>WindowsFormsApp1.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Demo.WindowsForms">
       <HintPath>G:\软件安装包\greatmaps (1)\sourceCode\greatmaps\Demo.WindowsForms\bin\Debug\Demo.WindowsForms.exe</HintPath>
+    </Reference>
+    <Reference Include="fitting_work, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\fitting_work.dll</HintPath>
     </Reference>
     <Reference Include="GMap.NET.Core">
       <HintPath>G:\软件安装包\greatmaps (1)\sourceCode\greatmaps\GMap.NET.WindowsForms\bin\Debug\GMap.NET.Core.dll</HintPath>
@@ -42,14 +121,24 @@
     <Reference Include="GMap.NET.WindowsForms">
       <HintPath>G:\软件安装包\greatmaps (1)\sourceCode\greatmaps\GMap.NET.WindowsForms\bin\Debug\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="huatuTest">
+      <HintPath>bin\Debug\huatuTest.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.MSScriptControl">
       <HintPath>obj\Debug\Interop.MSScriptControl.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="M1">
+      <HintPath>..\..\电网项目资源\M1\for_redistribution_files_only\M1.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.JScript" />
     <Reference Include="MSScriptControl">
       <HintPath>G:\软件安装包\greatmaps (1)\sourceCode\msscriptcontrol_dll\MSScriptControl.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MWArray, Version=2.15.1.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>G:\软件安装\Matlab\MATLAB Compiler Runtime\MATLAB Runtime\v90\toolbox\dotnetbuilder\bin\win64\v2.0\MWArray.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
       <HintPath>G:\软件安装包\greatmaps (1)\sourceCode\greatmaps\Demo.WindowsForms\bin\Debug\v4.5.2\MySql.Data.dll</HintPath>
@@ -66,8 +155,20 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="test_C">
+      <HintPath>C:\Windows\SysWOW64\test_C.dll</HintPath>
+    </Reference>
+    <Reference Include="ydpj_yuce">
+      <HintPath>..\..\电网项目资源\ydpj_yuce\for_redistribution_files_only\ydpj_yuce.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeiXianShuaiHao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeiXianShuaiHao.Designer.cs">
+      <DependentUpon>BeiXianShuaiHao.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChartTemplate.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -75,29 +176,35 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_Child.cs">
+    <Compile Include="Frm_Child_guzhang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm_Child.Designer.cs">
-      <DependentUpon>Frm_Child.cs</DependentUpon>
+    <Compile Include="Frm_Child_guzhang.Designer.cs">
+      <DependentUpon>Frm_Child_guzhang.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_Child2.cs">
+    <Compile Include="Analysis_Pre.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm_Child2.Designer.cs">
-      <DependentUpon>Frm_Child2.cs</DependentUpon>
+    <Compile Include="Analysis_Pre.Designer.cs">
+      <DependentUpon>Analysis_Pre.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_Child3.cs">
+    <Compile Include="Frm_Child_kongxin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm_Child3.Designer.cs">
-      <DependentUpon>Frm_Child3.cs</DependentUpon>
+    <Compile Include="Frm_Child_kongxin.Designer.cs">
+      <DependentUpon>Frm_Child_kongxin.cs</DependentUpon>
     </Compile>
     <Compile Include="Frm_Child4.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Frm_Child4.Designer.cs">
       <DependentUpon>Frm_Child4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Child_kongxinlv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Child_kongxinlv.designer.cs">
+      <DependentUpon>Frm_Child_kongxinlv.cs</DependentUpon>
     </Compile>
     <Compile Include="MarkerRoute.cs" />
     <Compile Include="MarkerRoute.Designer.cs">
@@ -111,18 +218,29 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="工具类\DBlink.cs" />
     <Compile Include="工具类\绘制点和线.cs" />
+    <Compile Include="数据实体类\guzhang.cs" />
+    <Compile Include="数据实体类\date.cs" />
     <Compile Include="数据实体类\point_data.cs" />
     <Compile Include="数据实体类\route.cs" />
     <Compile Include="数据实体类\route_data.cs" />
     <Compile Include="数据实体类\r_p.cs" />
+    <EmbeddedResource Include="BeiXianShuaiHao.resx">
+      <DependentUpon>BeiXianShuaiHao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm_Child.resx">
-      <DependentUpon>Frm_Child.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_Child_guzhang.resx">
+      <DependentUpon>Frm_Child_guzhang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm_Child2.resx">
-      <DependentUpon>Frm_Child2.cs</DependentUpon>
+    <EmbeddedResource Include="Analysis_Pre.resx">
+      <DependentUpon>Analysis_Pre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Child_kongxin.resx">
+      <DependentUpon>Frm_Child_kongxin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Child_kongxinlv.resx">
+      <DependentUpon>Frm_Child_kongxinlv.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MarkerRoute.resx">
       <DependentUpon>MarkerRoute.cs</DependentUpon>
@@ -138,7 +256,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="App1.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,9 +268,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="WindowsFormsApp1_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="全球图标.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
